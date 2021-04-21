@@ -46,7 +46,7 @@ const index = ({user}) => {
         } else {
           //cookie.set('user',JSON.stringify(response))
           router.push('/home')
-          window.location.reload();
+          window.location.replace('/home')
         }
     }).catch(err=>{
       console.log(err)
