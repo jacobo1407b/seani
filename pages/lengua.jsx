@@ -17,16 +17,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const lengua = ({ alumno }) => {
+const lengua = ({ alumno, user }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const classes = useStyles();
 
   useEffect(() => {
-    dispatch(accionTest(true));
-    dispatch(accionTipe("Estructura de la lengua"));
-    if (!alumno?.data?.activeLengua) {
+    if (user) {
       router.push("/home");
+    } else {
+      dispatch(accionTest(true));
+      dispatch(accionTipe("Estructura de la lengua"));
+      if (!alumno?.data?.activeLengua) {
+        router.push("/home");
+      }
     }
     return () => {
       dispatch(accionTest(false));

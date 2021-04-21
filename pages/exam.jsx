@@ -8,18 +8,23 @@ import Pagination from "@material-ui/lab/Pagination";
 import Pagina1 from "../components/Exam/Pregunta1";
 import Head from "next/head";
 
-const exam = ({ alumno }) => {
+const exam = ({ alumno, user }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const classes = useStyleExam();
 
   useEffect(() => {
-    dispatch(accionTest(true));
-    dispatch(accionTipe("Pensamiento analítico"));
-
-    if (!alumno?.data?.activeExam1) {
+    if (user) {
       router.push("/home");
+    } else {
+      dispatch(accionTest(true));
+      dispatch(accionTipe("Pensamiento analítico"));
+
+      if (!alumno?.data?.activeExam1) {
+        router.push("/home");
+      }
     }
+
     return () => {
       dispatch(accionTest(false));
       dispatch(accionTipe(""));

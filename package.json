@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "next",
-    "start": "next --port $PORT",
+    "start": "next start",
     "build": "next build",
     "dev:cus": "node server.js",
     "start:cus": "NODE_ENV=production node server.js"

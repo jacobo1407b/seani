@@ -17,17 +17,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const logico = ({ alumno }) => {
+const logico = ({ alumno, user }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const classes = useStyles();
 
   useEffect(() => {
-    dispatch(accionTest(true));
-    dispatch(accionTipe("Comprensión lectora"));
-    if (!alumno?.data?.activeLogic) {
+    if (user) {
       router.push("/home");
+    } else {
+      dispatch(accionTest(true));
+      dispatch(accionTipe("Comprensión lectora"));
+      if (!alumno?.data?.activeLogic) {
+        router.push("/home");
+      }
     }
+
     return () => {
       dispatch(accionTest(false));
       dispatch(accionTipe(""));

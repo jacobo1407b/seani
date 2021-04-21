@@ -86,7 +86,7 @@ const MenuApp = ({user,alumno}) => {
   const activeTest = useSelector((state) => state.activeTest);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const logout = async () => {
-    await fetch(`${host}/api/logout`);
+    await fetch(`/api/logout`);
     window.location.reload();
   };
   const handleMobileMenuClose = () => {

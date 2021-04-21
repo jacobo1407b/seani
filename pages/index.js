@@ -1,13 +1,20 @@
-import React, { useState} from "react";
+import React, { useState,useEffect} from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useSnackbar } from "notistack";
 import {logIn} from '../utils/api'
 import Head from 'next/head'
-import cookie from 'js-cookie';
+import { useRouter } from 'next/router'
 
 
-const index = () => {
 
+const index = ({user}) => {
+  const router = useRouter()
+
+  useEffect(() => {
+    if(user){
+      router.push('/home')
+    }
+  }, [])
   const [isloadin, setIsloadin] = useState(false);
   const [formDta, setFormDta] = useState({ password: "", email: "" });
   const { enqueueSnackbar } = useSnackbar();
@@ -37,7 +44,8 @@ const index = () => {
             variant: "error",
           });
         } else {
-          cookie.set('user',JSON.stringify(response))
+          //cookie.set('user',JSON.stringify(response))
+          router.push('/home')
           window.location.reload();
         }
     }).catch(err=>{

@@ -17,17 +17,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const mate = ({ alumno }) => {
+const mate = ({ alumno, user }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const classes = useStyles();
 
   useEffect(() => {
-    dispatch(accionTest(true));
-    dispatch(accionTipe("Pensamiento matemático"));
-    if (!alumno?.data?.activeMat) {
+    if (user) {
       router.push("/home");
+    } else {
+      dispatch(accionTest(true));
+      dispatch(accionTipe("Pensamiento matemático"));
+      if (!alumno?.data?.activeMat) {
+        router.push("/home");
+      }
     }
+
     return () => {
       dispatch(accionTest(false));
       dispatch(accionTipe(""));

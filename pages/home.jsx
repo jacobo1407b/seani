@@ -1,4 +1,4 @@
-import React,{Fragment} from 'react';
+import React,{Fragment,useEffect} from 'react';
 import { Container, Button, Grid } from "semantic-ui-react";
 import { useSnackbar } from "notistack";
 import Logo from '../assets/images/utt.png';
@@ -8,9 +8,17 @@ import Qwerty from '../assets/images/qwerty.mp4'
 import Head from 'next/head'
 
 
-const home = ({alumno}) => {
-    const { enqueueSnackbar } = useSnackbar();
-    const router = useRouter()
+const home = ({alumno,user}) => {
+  const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
+  
+  useEffect(() => {
+    if(!user){
+      router.push('/')
+    }
+  }, [])
+    
+
 
     const handlerExam1 = () => {
         if (!alumno.data.activeExam1) {
