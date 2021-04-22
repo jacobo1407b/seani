@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const accionAlumno = data => {\n  return {\n    type: \"ALUMNO\",\n    payload: data\n  };\n};","map":null,"metadata":{},"sourceType":"module"}
