@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core/styles";
 import Pagination from "@material-ui/lab/Pagination";
 import { Container } from "semantic-ui-react";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector} from "react-redux";
 import { accionTest, accionTipe } from "../redux/accion";
 import data from "../assets/json/exam_PensaLogic.json";
 import Logic from "../components/Exam/Logic";
@@ -17,21 +17,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const logico = ({ alumno, user }) => {
+const logico = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const classes = useStyles();
+  const alumno = useSelector(state => state.alumno)
 
   useEffect(() => {
-    if (user) {
-      router.push("/home");
-    } else {
       dispatch(accionTest(true));
       dispatch(accionTipe("Comprensión lectora"));
       if (!alumno?.data?.activeLogic) {
         router.push("/home");
       }
-    }
+    
 
     return () => {
       dispatch(accionTest(false));
@@ -40,7 +38,7 @@ const logico = ({ alumno, user }) => {
   }, []);
 
   const handleChange = (event, value) => {
-    router.push(`/logico?page=${value}`);
+    window.location.replace(`/logico?page=${value}`)
   };
 
   function elegir(numero) {

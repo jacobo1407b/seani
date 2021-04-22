@@ -15,8 +15,5 @@ module.exports = withImages(
   
       return config;
     },
-    devIndicators: {
-      autoPrerender: false,
-    },
   })
 );

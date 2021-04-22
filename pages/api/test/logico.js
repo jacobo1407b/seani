@@ -6,6 +6,6 @@ export default async (req, res) => {
     await db.doc(`${collection}/${id}`).update({ logico: arre });
     return res.status(200).json({ success: true, error: false });
   } catch (error) {
-    return res.status(401).json({ err, error: true });
+    return res.status(401).json({ error, error: true });
   }
 };

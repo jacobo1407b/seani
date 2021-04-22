@@ -6,6 +6,7 @@ const initialState = {
   activeTest: false,
   time: 0,
   typeTest: "",
+  alumno: {},
 };
 
 function updateState(state = initialState, action) {
@@ -14,6 +15,11 @@ function updateState(state = initialState, action) {
       return {
         ...state,
         user: action.payload,
+      };
+    case "ALUMNO":
+      return {
+        ...state,
+        alumno: action.payload,
       };
     case "TIPE":
       return {

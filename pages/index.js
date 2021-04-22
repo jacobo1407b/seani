@@ -4,6 +4,7 @@ import { useSnackbar } from "notistack";
 import {logIn} from '../utils/api'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+//import {useSelector} from 'react-redux'
 
 
 
@@ -45,7 +46,7 @@ const index = ({user}) => {
           });
         } else {
           //cookie.set('user',JSON.stringify(response))
-          router.push('/home')
+          //router.push('/home')
           window.location.replace('/home')
         }
     }).catch(err=>{
@@ -114,5 +115,3 @@ const index = ({user}) => {
 };
 
 export default index;
-//validate-form
-//alert-validate

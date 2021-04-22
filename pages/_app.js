@@ -2,13 +2,14 @@ import { Provider } from "react-redux";
 import withRedux from "next-redux-wrapper";
 import store from "../redux/store";
 import { SnackbarProvider } from "notistack";
+//import Router from "next/router";
 import { au, db } from "../utils/firebase";
 import { collection } from "../utils/variables";
 import Layout from "../Layout/Layout";
-import { data } from "../utils/staticData";
 import "materialize-css/dist/css/materialize.css";
 import "semantic-ui-css/semantic.min.css";
 import "../assets/styles/index.css";
+//import { route } from "next/dist/next-server/server/router";
 /*
 export async function getStaticProps() {
   // Call an external API endpoint to get posts
@@ -61,13 +62,17 @@ function MyApp({ Component, pageProps, respuesta, alumno }) {
 MyApp.getInitialProps = async ({ ctx }) => {
   const user = au.currentUser;
   const respuesta = { user: user };
-
+  const data = user ? await db
+      .collection(collection)
+      .where("user", "==", respuesta?.user?.uid)
+      .get() : null
+    const alumno = { data: data?.docs[0]?.data() };
   // const respuesta = await getInitialData();
-  if (!respuesta.user) {
-    //if (ctx?.req?.url !== "/") {
-      //ctx?.res?.writeHead(302, { Location: "/" })?.end();
+  /*if (!respuesta.user) {
+    if (ctx?.req?.url !== "/") {
+      ctx?.res?.writeHead(302, { Location: "/" })?.end();
       return {};
-    //}
+    }
     return {};
   } else {
     const data = await db
@@ -75,18 +80,17 @@ MyApp.getInitialProps = async ({ ctx }) => {
       .where("user", "==", respuesta?.user?.uid)
       .get();
     const alumno = { data: data?.docs[0]?.data() };
-    //if (ctx?.req?.url === "/") {
-      //ctx?.res?.writeHead(302, { Location: "/home" })?.end();
+    if (ctx?.req?.url === "/") {
+      ctx?.res?.writeHead(302, { Location: "/home" })?.end();
       return { respuesta, alumno };
-    //}
+    }
     return { respuesta, alumno };
-  }
+  }*/
+  return { respuesta, alumno };
 };
 const makeStore = () => store;
 
 export default withRedux(makeStore)(MyApp);
-
-
 
 /*0
   const redirectOnError = () =>
@@ -97,4 +101,27 @@ export default withRedux(makeStore)(MyApp);
     typeof window !== "undefined"
       ? window.location.replace("/home")
       : ctx.res.writeHead(302, { Location: "/home" })
+*/
+
+/*
+const user = au.currentUser;
+  const respuesta = { user: user };
+  const data = respuesta.user?.uid ? await db
+        .collection(collection)
+        .where("user", "==", respuesta?.user?.uid)
+        .get() : null
+  const alumno = { data: data?.docs[0]?.data() };
+    if (!respuesta.user) {
+      if (ctx?.req?.url !== "/") {
+        ctx?.res?.writeHead(302, { Location: "/" })?.end();
+        return {};
+      }
+      return {};
+    } else {
+      if (ctx?.req?.url === "/") {
+        ctx?.res?.writeHead(302, { Location: "/home" })?.end();
+        return { respuesta, alumno };
+      }
+      return { respuesta, alumno };
+    }
 */

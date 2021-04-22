@@ -42,31 +42,31 @@ const NoResponsive = () => {
                 case "Pensamiento analítico":
                   //exam
                   examCancel({ id: user?.uid }).then(() => {
-                    window.location.replace("/");
+                    window.location.replace("/home");
                   });
                   break;
                 case "Estructura de la lengua":
                   //lengia
                   lenguaCancel({ id: user?.uid }).then(() => {
-                    window.location.replace("/");
+                    window.location.replace("/home");
                   });
                   break;
                 case "Comprensión lectora":
                   //logico
                   logiCancel({ id: user?.uid }).then(() => {
-                    window.location.replace("/");
+                    window.location.replace("/home");
                   });
                   break;
                 case "Pensamiento matemático":
                   //mate
                   mateCancel({ id: user?.uid }).then(() => {
-                    window.location.replace("/");
+                    window.location.replace("/home");
                   });
                   break;
 
                 default:
                   examCancel({ id: user?.uid }).then(() => {
-                    window.location.replace("/");
+                    window.location.replace("/home");
                   });
                   break;
               }

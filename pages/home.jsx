@@ -6,17 +6,20 @@ import { useRouter } from 'next/router'
 import Vid from '../assets/video/camara-micro.mp4';
 import Qwerty from '../assets/images/qwerty.mp4'
 import Head from 'next/head'
+import {useSelector} from 'react-redux';
 
 
-const home = ({alumno,user}) => {
+const home = ({user}) => {
   const router = useRouter();
+  const alumno = useSelector(state => state.alumno)
   const { enqueueSnackbar } = useSnackbar();
-  
+
   useEffect(() => {
     if(!user){
       router.push('/')
     }
   }, [])
+  
     
 
 
@@ -27,7 +30,8 @@ const home = ({alumno,user}) => {
           });
           return false;
         } else {
-            router.push('/exam?page=1')
+          window.location.replace(`/exam?page=1`)
+            //router.push('/exam?page=1')
         }
       };
     
@@ -38,7 +42,8 @@ const home = ({alumno,user}) => {
           });
           return false;
         } else {
-            router.push('/logico?page=1')
+          window.location.replace(`/logico?page=1`)
+            //router.push('/logico?page=1')
         }
       };
       const mate = () => {
@@ -48,7 +53,8 @@ const home = ({alumno,user}) => {
           });
           return false;
         } else {
-            router.push('/mate?page=1')
+          window.location.replace(`/mate?page=1`)
+            //router.push('/mate?page=1')
         }
       };
       const lengua = () => {
@@ -58,7 +64,8 @@ const home = ({alumno,user}) => {
           });
           return false;
         } else {
-            router.push('/lengua?page=1')
+          window.location.replace(`/lengua?page=1`)
+            //router.push('/lengua?page=1')
         }
       };
 

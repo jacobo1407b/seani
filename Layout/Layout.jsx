@@ -1,13 +1,15 @@
-import React from 'react'
+import React ,{useEffect}from 'react'
 import MenuBar from '../components/Menu/Menu';
-import {useDispatch} from 'react-redux';
-import {accionUser} from '../redux/accion'
+import {useDispatch,useSelector} from 'react-redux';
+import {accionUser,accionAlumno} from '../redux/accion'
 const Layout = ({children,user,alumno}) => {
     const dispatch = useDispatch();
     dispatch(accionUser(user))
+    dispatch(accionAlumno(alumno))
+    const user2 = useSelector(state => state.user)
     return (
         <div>
-            {user?(<MenuBar user={user} alumno={alumno}/>):null}
+            {user2?(<MenuBar/>):null}
             {children}
         </div>
     )

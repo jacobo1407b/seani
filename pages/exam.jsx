@@ -1,29 +1,27 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import data from "../assets/json/Examen_PensaAnlitico.json";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector} from "react-redux";
 import { accionTest, accionTipe } from "../redux/accion";
 import { useStyleExam } from "../assets/style";
 import Pagination from "@material-ui/lab/Pagination";
 import Pagina1 from "../components/Exam/Pregunta1";
 import Head from "next/head";
 
-const exam = ({ alumno, user }) => {
+const exam = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const classes = useStyleExam();
+  const alumno = useSelector(state => state.alumno)
 
   useEffect(() => {
-    if (user) {
-      router.push("/home");
-    } else {
       dispatch(accionTest(true));
       dispatch(accionTipe("Pensamiento analítico"));
 
       if (!alumno?.data?.activeExam1) {
         router.push("/home");
       }
-    }
+
 
     return () => {
       dispatch(accionTest(false));
@@ -32,7 +30,8 @@ const exam = ({ alumno, user }) => {
   }, []);
 
   const handleChange = (event, value) => {
-    router.push(`/exam?page=${value}`);
+    //router.push(`/exam?page=${value}`);
+    window.location.replace(`/exam?page=${value}`)
   };
 
   function elegir(numero) {

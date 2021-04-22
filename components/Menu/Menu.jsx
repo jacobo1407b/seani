@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { host } from "../../utils/variables";
 import Exit from "../Modal/ModalBasic";
 import NotRes from "../Modal/NoResponsive";
 import Reloj from "../Reloj/RelojLimit";
@@ -15,6 +14,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import MoreIcon from "@material-ui/icons/MoreVert";
+
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -80,14 +80,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MenuApp = ({user,alumno}) => {
+const MenuApp = () => {
   const classes = useStyles();
+  const user = useSelector(state => state.user);
+  const alumno = useSelector(state => state.alumno)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const activeTest = useSelector((state) => state.activeTest);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const logout = async () => {
     await fetch(`/api/logout`);
-    window.location.reload();
+    window.location.replace('/');
   };
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);

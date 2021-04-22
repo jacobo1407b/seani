@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector} from "react-redux";
 import { accionTest, accionTipe } from "../redux/accion";
 import data from "../assets/json/exam_EstrucLengua.json";
 import Pagination from "@material-ui/lab/Pagination";
@@ -17,21 +17,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const lengua = ({ alumno, user }) => {
+const lengua = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const classes = useStyles();
+  const user = useSelector(state => state.user)
+  const alumno = useSelector(state => state.alumno)
 
   useEffect(() => {
-    if (user) {
-      router.push("/home");
-    } else {
       dispatch(accionTest(true));
       dispatch(accionTipe("Estructura de la lengua"));
       if (!alumno?.data?.activeLengua) {
         router.push("/home");
+        
       }
-    }
+ 
     return () => {
       dispatch(accionTest(false));
       dispatch(accionTipe(""));
@@ -39,7 +39,8 @@ const lengua = ({ alumno, user }) => {
   }, []);
 
   const handleChange = (event, value) => {
-    router.push(`/lengua?page=${value}`);
+    //router.push(`/lengua?page=${value}`);
+    window.location.replace(`/lengua?page=${value}`)
   };
 
   function elegir(numero) {
@@ -80,5 +81,7 @@ const lengua = ({ alumno, user }) => {
     </>
   );
 };
+
+
 
 export default lengua;
