@@ -30,8 +30,7 @@ const exam = () => {
   }, []);
 
   const handleChange = (event, value) => {
-    //router.push(`/exam?page=${value}`);
-    window.location.replace(`/exam?page=${value}`)
+    router.push(`/exam?page=${value}`);
   };
 
   function elegir(numero) {

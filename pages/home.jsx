@@ -1,77 +1,75 @@
-import React,{Fragment,useEffect} from 'react';
+import React, { Fragment, useEffect,useState } from "react";
 import { Container, Button, Grid } from "semantic-ui-react";
 import { useSnackbar } from "notistack";
-import Logo from '../assets/images/utt.png';
-import { useRouter } from 'next/router'
-import Vid from '../assets/video/camara-micro.mp4';
-import Qwerty from '../assets/images/qwerty.mp4'
-import Head from 'next/head'
-import {useSelector} from 'react-redux';
+import Logo from "../assets/images/utt.png";
+import { useRouter } from "next/router";
+import Vid from "../assets/video/camara-micro.mp4";
+import Qwerty from "../assets/images/qwerty.mp4";
+import Head from "next/head";
+import { useSelector } from "react-redux";
 
-
-const home = ({user}) => {
+const home = () => {
   const router = useRouter();
-  const alumno = useSelector(state => state.alumno)
+  const alumno = useSelector((state) => state.alumno);
+  const user = useSelector((state) => state.user);
   const { enqueueSnackbar } = useSnackbar();
-
   useEffect(() => {
-    if(!user){
-      router.push('/')
+    console.log(user)
+      if (!user) {
+        router.push("/");
+      }
+    
+  }, []);
+
+  const handlerExam1 = () => {
+    if (!alumno.data.activeExam1) {
+      enqueueSnackbar("Este examen esta desactivado", {
+        variant: "info",
+      });
+      return false;
+    } else {
+      //window.location.replace(`/exam?page=1`)
+      router.push("/exam?page=1");
     }
-  }, [])
-  
-    
+  };
 
+  const logica = () => {
+    if (!alumno.data.activeLogic) {
+      enqueueSnackbar("Este examen esta desactivado", {
+        variant: "info",
+      });
+      return false;
+    } else {
+      //window.location.replace(`/logico?page=1`)
+      router.push("/logico?page=1");
+    }
+  };
+  const mate = () => {
+    if (!alumno.data.activeMat) {
+      enqueueSnackbar("Este examen esta desactivado", {
+        variant: "info",
+      });
+      return false;
+    } else {
+      //window.location.replace(`/mate?page=1`)
+      router.push("/mate?page=1");
+    }
+  };
+  const lengua = () => {
+    if (!alumno.data.activeLengua) {
+      enqueueSnackbar("Este examen esta desactivado", {
+        variant: "info",
+      });
+      return false;
+    } else {
+      //window.location.replace(`/lengua?page=1`)
+      router.push("/lengua?page=1");
+    }
+  };
 
-    const handlerExam1 = () => {
-        if (!alumno.data.activeExam1) {
-          enqueueSnackbar("Este examen esta desactivado", {
-            variant: "info",
-          });
-          return false;
-        } else {
-          window.location.replace(`/exam?page=1`)
-            //router.push('/exam?page=1')
-        }
-      };
-    
-      const logica = () => {
-        if (!alumno.data.activeLogic) {
-          enqueueSnackbar("Este examen esta desactivado", {
-            variant: "info",
-          });
-          return false;
-        } else {
-          window.location.replace(`/logico?page=1`)
-            //router.push('/logico?page=1')
-        }
-      };
-      const mate = () => {
-        if (!alumno.data.activeMat) {
-          enqueueSnackbar("Este examen esta desactivado", {
-            variant: "info",
-          });
-          return false;
-        } else {
-          window.location.replace(`/mate?page=1`)
-            //router.push('/mate?page=1')
-        }
-      };
-      const lengua = () => {
-        if (!alumno.data.activeLengua) {
-          enqueueSnackbar("Este examen esta desactivado", {
-            variant: "info",
-          });
-          return false;
-        } else {
-          window.location.replace(`/lengua?page=1`)
-            //router.push('/lengua?page=1')
-        }
-      };
-
-    return (
-        <Container textAlign="center">
-          <Head>
+  return (
+    <Container textAlign="center">
+      <Head>
         <title>SEANI | Home</title>
       </Head>
       <Fragment>
@@ -116,9 +114,7 @@ const home = ({user}) => {
               loop
               preload="auto"
             >
-              <source 
-               src={Vid} type="video/mp4"
-               />
+              <source src={Vid} type="video/mp4" />
             </video>
           </div>
         </blockquote>
@@ -227,18 +223,17 @@ const home = ({user}) => {
         </div>
       </Fragment>
     </Container>
-    )
-}
+  );
+};
 
-const TextIng = ({dataAlumno}) => {
+const TextIng = ({ dataAlumno }) => {
+  return (
+    <>
+      <h1>
+        BIENVENIDO {"(A)"}, {dataAlumno?.data?.username}
+      </h1>
+    </>
+  );
+};
 
-    return (
-      <>
-        <h1>
-          BIENVENIDO {"(A)"}, {dataAlumno?.data?.username}
-        </h1>
-      </>
-    );
-  };
-
-export default home
+export default home;

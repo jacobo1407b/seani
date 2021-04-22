@@ -1,4 +1,5 @@
-import { host } from "./variables";
+import { host ,collection} from "./variables";
+import {db,auth} from './firebase'
 import 'isomorphic-fetch'
 var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
@@ -16,54 +17,83 @@ const raw = (data, tipe) => {
   };
 };
 
-export const logIn =(data)=>{
-    return fetch(`/api/log`, raw(data,"POST")).then(response=>response.json());
-}
-//get initial props firebase
-export const getInitialData =()=>{
-    return fetch(`${host}/api/inicial`).then(response=>response.json());
+export const logIn =async (data)=>{
+  return auth.signInWithEmailAndPassword(
+    data.email,
+    data.password
+  )
 }
 //get info user
 export const getUser =(data)=>{
     return fetch(`${host}/api/user`,raw(data,"POST")).then(dat =>dat.json());
 }
 //active socket
-export const openSocket=()=>{
-    fetch("/api/socket");
+export const openSocket=async (data)=>{
+  const {id,time} = data
+  await db.doc(`${collection}/${id}`).update({
+    time:time
+  });
 }
 
 
 // update response of alumno
-export const testExam = (data)=>{
-  return fetch(`/api/test/exam`,raw(data,"POST")).then(response=>response.json());
+export const testExam = async(data)=>{
+  const {id,arre} = data
+  await db.doc(`${collection}/${id}`).update({ test: arre });
 }
-export const testLogic=(data)=>{
-  return fetch(`/api/test/logico`,raw(data,"POST")).then(response=>response.json());
+export const testLogic=async(data)=>{
+  const {id,arre} = data
+  await db.doc(`${collection}/${id}`).update({ logico: arre });
 
 }
-export const lenguaExam =(data)=>{
-  return fetch(`/api/test/lengua`,raw(data,"POST")).then(response=>response.json());
+export const lenguaExam =async(data)=>{
+  const {id,arre} = data
+  await db.doc(`${collection}/${id}`).update({ lengua: arre });
 }
 
-export const mateExam =(data)=>{
-  return fetch(`/api/test/mate`,raw(data,"POST")).then(response=>response.json());
+export const mateExam =async(data)=>{
+  const {id,arre} = data
+  await db.doc(`${collection}/${id}`).update({ matematico: arre });
+
 }
 
 
 //finish test
-export const mateCancel =(data)=>{
-  return fetch(`/api/cancel/mate`,raw(data,"POST")).then(response=>response.json());
+export const mateCancel =async(data)=>{
+  await db.doc(`${collection}/${data.id}`).update({ activeMat: false });
+
 }
-export const logiCancel =(data)=>{
-  return fetch(`/api/cancel/logic`,raw(data,"POST")).then(response=>response.json());
+export const logiCancel =async(data)=>{
+
+  await db.doc(`${collection}/${data.id}`).update({ activeLogic: false });
 }
-export const lenguaCancel =(data)=>{
-  return fetch(`/api/cancel/lengua`,raw(data,"POST")).then(response=>response.json());
+export const lenguaCancel =async(data)=>{
+  await db.doc(`${collection}/${data.id}`).update({ activeLengua: false });
+
 }
-export const examCancel =(data)=>{
-  return fetch(`/api/cancel/exam`,raw(data,"POST")).then(response=>response.json());
+export const examCancel =async(data)=>{
+  await db.doc(`${collection}/${data.id}`).update({ activeExam1: false });
 }
 //destroy
-export const allCancel =(data)=>{
-  return fetch(`/api/cancel/all`,raw(data,"POST")).then(response=>response.json());
+export const allCancel =async(data)=>{
+  await db.doc(`${collection}/${data.id}`).update({
+    activeLengua: false,
+    activeMat: false,
+    activeLogic: false,
+    activeExam1: false,
+    time: 0,
+  });
+}
+
+/**GET DATA USER */
+export const getInitial = async (uid)=>{
+  const data = await db
+      .collection(collection)
+      .where("user", "==", uid)
+      .get();
+    return { data: data?.docs[0]?.data() };
+}
+
+export const logOut = async ()=>{
+  await auth.signOut();
 }

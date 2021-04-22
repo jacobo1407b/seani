@@ -39,8 +39,8 @@ const lengua = () => {
   }, []);
 
   const handleChange = (event, value) => {
-    //router.push(`/lengua?page=${value}`);
-    window.location.replace(`/lengua?page=${value}`)
+    router.push(`/lengua?page=${value}`);
+    //window.location.replace(`/lengua?page=${value}`)
   };
 
   function elegir(numero) {

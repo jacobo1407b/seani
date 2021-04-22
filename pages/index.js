@@ -1,15 +1,17 @@
 import React, { useState,useEffect} from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useSnackbar } from "notistack";
-import {logIn} from '../utils/api'
+import {logIn,getInitial} from '../utils/api'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
-//import {useSelector} from 'react-redux'
+import { useRouter } from 'next/router';
+import {useDispatch} from 'react-redux';
+import {accionUser,accionAlumno} from '../redux/accion'
 
 
 
 const index = ({user}) => {
   const router = useRouter()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if(user){
@@ -38,20 +40,16 @@ const index = ({user}) => {
       return false;
     }
     setIsloadin(true);
-    logIn(formDta).then(response=>{
+    logIn(formDta).then(async response=>{
+      dispatch(accionUser(response.user))
+      const {data} = await getInitial(response.user.uid)
+      dispatch(accionAlumno({data}))
       setIsloadin(false);
-        if (response.error) {
-          enqueueSnackbar(response.message, {
-            variant: "error",
-          });
-        } else {
-          //cookie.set('user',JSON.stringify(response))
-          //router.push('/home')
-          window.location.replace('/home')
-        }
+      router.push('/home');
     }).catch(err=>{
+      setIsloadin(false);
       console.log(err)
-        enqueueSnackbar("Error del servidor", {
+        enqueueSnackbar(err.message, {
           variant: "error",
         });
     })

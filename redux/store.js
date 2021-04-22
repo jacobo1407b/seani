@@ -1,12 +1,13 @@
 import { createStore } from "redux";
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const initialState = {
   user: {},
+  alumno: {},
   rejoj: {},
   activeTest: false,
   time: 0,
   typeTest: "",
-  alumno: {},
 };
 
 function updateState(state = initialState, action) {
@@ -45,10 +46,18 @@ function updateState(state = initialState, action) {
   /**
    * return state;
    */
-}
+}/*
+const makeStore = (initialState = exampleInitialState) => createStore(
+  reducer,
+  initialState,
+  composeWithDevTools(applyMiddleware(thunkMiddleware)),
+);
+
+export default makeStore;*/
 
 const store = createStore(
-  updateState
+  updateState,
+  composeWithDevTools()
   //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 

@@ -1,17 +1,22 @@
 import React from "react";
 import Swal from "sweetalert2";
+import {useRouter} from 'next/router'
 import MenuItem from "@material-ui/core/MenuItem";
 import DoneIcon from "@material-ui/icons/Done";
 import IconButton from "@material-ui/core/IconButton";
-import { useSelector } from "react-redux";
+import {accionAlumno} from '../../redux/accion'
+import { useSelector,useDispatch} from "react-redux";
 import {
   mateCancel,
   logiCancel,
   lenguaCancel,
   examCancel,
+  getInitial
 } from "../../utils/api";
 
 const NoResponsive = () => {
+  const dispatch = useDispatch()
+  const router = useRouter();
   const typeTest = useSelector((state) => state.typeTest);
   const time = useSelector((state) => state.time);
   const user = useSelector((state) => state.user);
@@ -41,32 +46,42 @@ const NoResponsive = () => {
               switch (typeTest) {
                 case "Pensamiento analítico":
                   //exam
-                  examCancel({ id: user?.uid }).then(() => {
-                    window.location.replace("/home");
+                  examCancel({ id: user?.uid }).then(async() => {
+                    const {data} = await getInitial(user.uid)
+                    dispatch(accionAlumno({data}))
+                    router.push('/home')
                   });
                   break;
                 case "Estructura de la lengua":
                   //lengia
-                  lenguaCancel({ id: user?.uid }).then(() => {
-                    window.location.replace("/home");
+                  lenguaCancel({ id: user?.uid }).then(async() => {
+                    const {data} = await getInitial(user.uid)
+                    dispatch(accionAlumno({data}))
+                    router.push('/home')
                   });
                   break;
                 case "Comprensión lectora":
                   //logico
-                  logiCancel({ id: user?.uid }).then(() => {
-                    window.location.replace("/home");
+                  logiCancel({ id: user?.uid }).then(async() => {
+                    const {data} = await getInitial(user.uid)
+                    dispatch(accionAlumno({data}))
+                    router.push('/home')
                   });
                   break;
                 case "Pensamiento matemático":
                   //mate
-                  mateCancel({ id: user?.uid }).then(() => {
-                    window.location.replace("/home");
+                  mateCancel({ id: user?.uid }).then(async() => {
+                    const {data} = await getInitial(user.uid)
+                    dispatch(accionAlumno({data}))
+                    router.push('/home')
                   });
                   break;
 
                 default:
-                  examCancel({ id: user?.uid }).then(() => {
-                    window.location.replace("/home");
+                  examCancel({ id: user?.uid }).then(async() => {
+                    const {data} = await getInitial(user.uid)
+                    dispatch(accionAlumno({data}))
+                    router.push('/home')
                   });
                   break;
               }

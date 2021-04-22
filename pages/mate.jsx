@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import { useDispatch,useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { accionTest, accionTipe } from "../redux/accion";
 import Pagination from "@material-ui/lab/Pagination";
 import { makeStyles } from "@material-ui/core/styles";
@@ -21,15 +21,14 @@ const mate = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const classes = useStyles();
-  const alumno = useSelector(state => state.alumno)
+  const alumno = useSelector((state) => state.alumno);
 
   useEffect(() => {
-      dispatch(accionTest(true));
-      dispatch(accionTipe("Pensamiento matemático"));
-      if (!alumno?.data?.activeMat) {
-        router.push("/home");
-      }
-    
+    dispatch(accionTest(true));
+    dispatch(accionTipe("Pensamiento matemático"));
+    if (!alumno?.data?.activeMat) {
+      router.push("/home");
+    }
 
     return () => {
       dispatch(accionTest(false));
@@ -37,7 +36,8 @@ const mate = () => {
     };
   }, []);
   const handleChange = (event, value) => {
-    window.location.replace(`/mate?page=${value}`)
+    //window.location.replace(`/mate?page=${value}`);
+    router.push(`/mate?page=${value}`);
   };
 
   function elegir(numero) {

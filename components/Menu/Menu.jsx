@@ -1,5 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import {useRouter} from 'next/router'
+import {accionAlumno,accionUser} from '../../redux/accion'
+import {logOut} from '../../utils/api'
 import Exit from "../Modal/ModalBasic";
 import NotRes from "../Modal/NoResponsive";
 import Reloj from "../Reloj/RelojLimit";
@@ -82,14 +85,19 @@ const useStyles = makeStyles((theme) => ({
 
 const MenuApp = () => {
   const classes = useStyles();
+  const dispatch = useDispatch()
+  const router = useRouter()
+
   const user = useSelector(state => state.user);
   const alumno = useSelector(state => state.alumno)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const activeTest = useSelector((state) => state.activeTest);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const logout = async () => {
-    await fetch(`/api/logout`);
-    window.location.replace('/');
+    logOut()
+    dispatch(accionUser({}));
+    dispatch(accionAlumno({}));
+    router.push('/')
   };
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);

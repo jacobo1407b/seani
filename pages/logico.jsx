@@ -38,7 +38,8 @@ const logico = () => {
   }, []);
 
   const handleChange = (event, value) => {
-    window.location.replace(`/logico?page=${value}`)
+    //window.location.replace(`/logico?page=${value}`)
+    router.push(`/logico?page=${value}`)
   };
 
   function elegir(numero) {
