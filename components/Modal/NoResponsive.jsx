@@ -24,7 +24,7 @@ const NoResponsive = () => {
   const primer = () => {
     if (time > 0) {
       Swal.fire({
-        title: `¿Terminar examen ${typeTest}?`,
+        title: `¿Terminar módulo ${typeTest}?`,
         text: "No podras revertir esto",
         icon: "warning",
         showCancelButton: true,
@@ -35,7 +35,7 @@ const NoResponsive = () => {
         if (result.value) {
           Swal.fire({
             title: "¿Estas seguro?",
-            text: "Tienes tiempo para revisar tu examen",
+            text: "Tienes tiempo para revisar tu módulo",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
