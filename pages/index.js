@@ -12,6 +12,9 @@ import {accionUser,accionAlumno} from '../redux/accion'
 const index = ({user}) => {
   const router = useRouter()
   const dispatch = useDispatch()
+  var fechaAplicacion = new Date("2021-04-26T08:00");
+  var fechaActual = new Date(Date.now())
+
 
   useEffect(() => {
     if(user){
@@ -33,26 +36,34 @@ const index = ({user}) => {
 
   const handlerSubmit = (e) => {
     e.preventDefault();
-    if (!formDta.email || !formDta.password) {
-      enqueueSnackbar("Completa los campos", {
-        variant: "error",
+    if(fechaActual<fechaAplicacion){
+      enqueueSnackbar("La fecha de aplicación es el Lunes", {
+        variant: "warning",
       });
       return false;
-    }
-    setIsloadin(true);
-    logIn(formDta).then(async response=>{
-      dispatch(accionUser(response.user))
-      const {data} = await getInitial(response.user.uid)
-      dispatch(accionAlumno({data}))
-      setIsloadin(false);
-      router.push('/home');
-    }).catch(err=>{
-      setIsloadin(false);
-      console.log(err)
-        enqueueSnackbar(err.message, {
+    }else{
+      if (!formDta.email || !formDta.password) {
+        enqueueSnackbar("Completa los campos", {
           variant: "error",
         });
-    })
+        return false;
+      }
+      setIsloadin(true);
+      logIn(formDta).then(async response=>{
+        dispatch(accionUser(response.user))
+        const {data} = await getInitial(response.user.uid)
+        dispatch(accionAlumno({data}))
+        setIsloadin(false);
+        router.push('/home');
+      }).catch(err=>{
+        setIsloadin(false);
+        console.log(err)
+          enqueueSnackbar(err.message, {
+            variant: "error",
+          });
+      })
+    }
+    
   };
 
   return (
