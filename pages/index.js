@@ -5,6 +5,7 @@ import {logIn,getInitial} from '../utils/api'
 import Head from 'next/head'
 import { useRouter } from 'next/router';
 import {useDispatch} from 'react-redux';
+import {fechaActual,fechaAplicacion} from '../utils/variables'
 import {accionUser,accionAlumno} from '../redux/accion'
 
 
@@ -12,8 +13,6 @@ import {accionUser,accionAlumno} from '../redux/accion'
 const index = ({user}) => {
   const router = useRouter()
   const dispatch = useDispatch()
-  var fechaAplicacion = new Date("2021-04-26T08:00");
-  var fechaActual = new Date(Date.now())
 
 
   useEffect(() => {

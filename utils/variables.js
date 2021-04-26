@@ -1,5 +1,7 @@
 export const host = "http://localhost:3000";
+//coleccion a conectarse
 export const collection = "e1-2021";
+//configuracion firebase
 export const firebaseConfig = {
   apiKey: "AIzaSyAyiLjNMCdX4vkB_kM0n8D_KE-tWhzGGg4",
   authDomain: "seani-954ac.firebaseapp.com",
@@ -10,3 +12,6 @@ export const firebaseConfig = {
   appId: "1:821462862987:web:43310b4bbc8b84f354d88e",
   measurementId: "G-EXBFMRJ8F4",
 };
+//poner fecha en cuando se aplicara
+export const fechaAplicacion = new Date("2021-04-26T08:00");
+export const fechaActual = new Date(Date.now());
