@@ -32,7 +32,7 @@ const index = ({ user }) => {
 
   const handlerSubmit = (e) => {
     e.preventDefault();
-    if (fechaActual > fechaAplicacion) {
+    if (fechaActual < fechaAplicacion) {
       Swal.fire({
         title: "El examen no esta disponible",
         text: "Espera la siguiente etapa",
