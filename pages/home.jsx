@@ -22,6 +22,7 @@ const home = () => {
   }, []);
 
   const handlerExam1 = () => {
+    console.log(alumno.activeExam1);
     if (!alumno.data.activeExam1) {
       enqueueSnackbar("Este examen esta desactivado", {
         variant: "info",
@@ -90,7 +91,7 @@ const home = () => {
           </blockquote>
         </Grid.Row>
         <Grid.Row>
-          <div className="card-panel">
+          <div className="card-panel w-100">
             <span className="blue-text text-darken-2">
               <p className="flow-text">Lógico / Matemáticas</p>
             </span>

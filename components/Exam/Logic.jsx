@@ -10,11 +10,13 @@ import {testLogic} from '../../utils/api';
 
 
 const Logic = ({ dtajs, dataAlumno, posision, todos }) => {
+
   const user = useSelector(state => state.user)
   let conver = parseInt(posision);
   let valorActive = dataAlumno[conver] ? dataAlumno[conver] : "";
   const [tempResp, setTempResp] = useState({});
   const [selectValue, setSelectValue] = useState(valorActive.respuesta);
+
   useEffect(() => {
     setSelectValue(valorActive.respuesta);
   }, [valorActive.respuesta]);
@@ -24,6 +26,7 @@ const Logic = ({ dtajs, dataAlumno, posision, todos }) => {
       pregunta: dtajs?._id,
       respuesta: e.target.value,
     });
+    console.log(datajs?._id);
     setSelectValue(e.target.value);
   };
 
@@ -38,6 +41,7 @@ const Logic = ({ dtajs, dataAlumno, posision, todos }) => {
       setTempResp({});
     }
   };
+
   return (
     <div>
       {dtajs?.pregunta_txt ? <h1>{dtajs?.pregunta_txt}</h1> : null}

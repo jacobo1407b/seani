@@ -69,6 +69,9 @@ const index = ({ user }) => {
 
   return (
     <>
+      <Head>
+        <title>SEANI UTT</title>
+      </Head>
       <Principal>
           <Contenido>
             <Users>
@@ -120,6 +123,8 @@ const index = ({ user }) => {
     </>
   );
 };
+
+
 
 const Principal = styled.div`
   width: 100%;
@@ -235,5 +240,4 @@ const Slide = styled.div`
   }
 
 `;
-
 export default index;
