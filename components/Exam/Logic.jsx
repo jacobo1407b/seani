@@ -21,6 +21,15 @@ const Logic = ({ dtajs, dataAlumno, posision, todos }) => {
     setSelectValue(valorActive.respuesta);
   }, [valorActive.respuesta]);
 
+  useEffect(()=>{
+
+    let respValue = dataAlumno[posision].respuesta;
+
+    respValue != "" ? console.log('contesta porfa') : 
+    setSelectValue();
+
+  }, [conver])
+
   const handlerElegirRespuesta = (e) => {
     setTempResp({
       pregunta: dtajs?._id,

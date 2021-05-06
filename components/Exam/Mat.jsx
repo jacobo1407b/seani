@@ -19,6 +19,15 @@ const Mat = ({ dtajs, dataAlumno, posision, todos }) => {
     setSelectValue(valorActive.respuesta);
   }, [valorActive.respuesta]);
 
+  useEffect(()=>{
+    console.log(dataAlumno[posision].respuesta);
+    let respValue = dataAlumno[posision].respuesta;
+
+    respValue != "" ? console.log('contesta porfa') : 
+    setSelectValue();
+
+  }, [conver])
+
   const handlerElegirRespuesta = (e) => {
     setTempResp({
       pregunta: dtajs?._id,

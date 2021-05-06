@@ -14,9 +14,20 @@ const Pregunta1 = ({ dtajs, dataAlumno, posision }) => {
   let valorActive = dataAlumno[conver] ? dataAlumno[conver] : "";
   const [tempResp, setTempResp] = useState({});
   const [selectValue, setSelectValue] = useState(valorActive.respuesta);
+
   useEffect(() => {
     setSelectValue(valorActive?.respuesta);
   }, [valorActive.respuesta]);
+
+  useEffect(()=>{
+  
+    let respValue = dataAlumno[posision].respuesta;
+
+    respValue != "" ? console.log('contesta porfa') : 
+    setSelectValue();
+
+  }, [conver])
+
   const handlerElegirRespuesta = (e) => {
     setTempResp({
       pregunta: dtajs?._id,
