@@ -13,7 +13,7 @@ export const firebaseConfig = {
   measurementId: "G-EXBFMRJ8F4",
 };
 //poner fecha en cuando se aplicara
-export const fechaAplicacion = new Date("2021-12-26T20:00");
+export const fechaAplicacion = new Date("2021-11-26T20:00");
 export const fechaActual = new Date(Date.now());
 
 
