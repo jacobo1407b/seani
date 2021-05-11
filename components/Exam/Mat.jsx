@@ -15,12 +15,13 @@ const Mat = ({ dtajs, dataAlumno, posision, todos }) => {
   let valorActive = dataAlumno[conver] ? dataAlumno[conver] : "";
   const [tempResp, setTempResp] = useState({});
   const [selectValue, setSelectValue] = useState(valorActive.respuesta);
+  
   useEffect(() => {
     setSelectValue(valorActive.respuesta);
   }, [valorActive.respuesta]);
 
   useEffect(()=>{
-    console.log(dataAlumno[posision].respuesta);
+  
     let respValue = dataAlumno[posision].respuesta;
 
     respValue != "" ? console.log('contesta porfa') : 
