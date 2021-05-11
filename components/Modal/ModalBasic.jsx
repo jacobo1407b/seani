@@ -88,7 +88,7 @@ const Modal = () => {
   
   return (
     <div>
-      <Menu.Item name="Terminar examen" onClick={primer} className="my-color" />
+      <Menu.Item name="Terminar este módulo" onClick={primer} className="my-color" />
     </div>
   );
 };

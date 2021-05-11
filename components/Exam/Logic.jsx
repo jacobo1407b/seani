@@ -10,20 +10,32 @@ import {testLogic} from '../../utils/api';
 
 
 const Logic = ({ dtajs, dataAlumno, posision, todos }) => {
+
   const user = useSelector(state => state.user)
   let conver = parseInt(posision);
   let valorActive = dataAlumno[conver] ? dataAlumno[conver] : "";
   const [tempResp, setTempResp] = useState({});
   const [selectValue, setSelectValue] = useState(valorActive.respuesta);
+
   useEffect(() => {
     setSelectValue(valorActive.respuesta);
   }, [valorActive.respuesta]);
+
+  useEffect(()=>{
+
+    let respValue = dataAlumno[posision].respuesta;
+
+    respValue != "" ? console.log('contesta porfa') : 
+    setSelectValue();
+
+  }, [conver])
 
   const handlerElegirRespuesta = (e) => {
     setTempResp({
       pregunta: dtajs?._id,
       respuesta: e.target.value,
     });
+    console.log(datajs?._id);
     setSelectValue(e.target.value);
   };
 
@@ -38,6 +50,7 @@ const Logic = ({ dtajs, dataAlumno, posision, todos }) => {
       setTempResp({});
     }
   };
+
   return (
     <div>
       {dtajs?.pregunta_txt ? <h1>{dtajs?.pregunta_txt}</h1> : null}
