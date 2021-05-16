@@ -34,8 +34,6 @@ const Lengua = ({ dtajs, dataAlumno, posision, todos }) => {
       respuesta: e.target.value,
     });
     setSelectValue(e.target.value);
-    
-    
   };
 
   const handlerSubmit = (e) => {

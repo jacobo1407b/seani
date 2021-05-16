@@ -23,15 +23,20 @@ export const logIn =async (data)=>{
     data.password
   )
 }
+
 //get info user
 export const getUser =(data)=>{
     return fetch(`${host}/api/user`,raw(data,"POST")).then(dat =>dat.json());
 }
+
 //active socket
 export const openSocket=async (data)=>{
   const {id,time} = data
   await db.doc(`${collection}/${id}`).update({
-    time:time
+    time:time,
+    timeLeng:time,
+    timeLogic:time,
+    timeMat:time
   });
 }
 

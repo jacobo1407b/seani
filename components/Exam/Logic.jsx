@@ -35,7 +35,6 @@ const Logic = ({ dtajs, dataAlumno, posision, todos }) => {
       pregunta: dtajs?._id,
       respuesta: e.target.value,
     });
-    console.log(datajs?._id);
     setSelectValue(e.target.value);
   };
 
