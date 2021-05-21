@@ -7,6 +7,7 @@ import Vid from "../assets/video/camara-micro.mp4";
 import Qwerty from "../assets/images/qwerty.mp4";
 import Head from "next/head";
 import { useSelector } from "react-redux";
+import Modulos from '../components/modules-examn/Modulos';
 
 const home = () => {
   const router = useRouter();
@@ -174,54 +175,7 @@ const home = () => {
             </a>
           </p>
         </blockquote>
-        <div className="container">
-          <Grid columns="equal">
-            <Grid.Row>
-              <Button
-                content="Pensamiento analítico"
-                icon="settings"
-                labelPosition="right"
-                fluid
-                color="orange"
-                size="huge"
-                onClick={handlerExam1}
-              />
-            </Grid.Row>
-            <Grid.Row>
-              <Button
-                content="Comprensión lectora"
-                icon="cog"
-                labelPosition="right"
-                fluid
-                color="orange"
-                size="huge"
-                onClick={logica}
-              />
-            </Grid.Row>
-            <Grid.Row>
-              <Button
-                content="Pensamiento matemático"
-                icon="react"
-                labelPosition="right"
-                fluid
-                color="orange"
-                size="huge"
-                onClick={mate}
-              />
-            </Grid.Row>
-            <Grid.Row>
-              <Button
-                content="Estructura de la lengua"
-                icon="male"
-                labelPosition="right"
-                fluid
-                color="orange"
-                size="huge"
-                onClick={lengua}
-              />
-            </Grid.Row>
-          </Grid>
-        </div>
+        <Modulos analitico={handlerExam1} lectora={logica} matematico={mate} lengua={lengua}></Modulos>
       </Fragment>
     </Container>
   );
