@@ -124,8 +124,6 @@ const index = ({ user }) => {
   );
 };
 
-
-
 const Principal = styled.div`
   width: 100%;
   height: 100vh;
@@ -133,7 +131,6 @@ const Principal = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
-
   @media screen and (max-width: 770px){
     background: linear-gradient(217deg, rgba(2, 175, 31, 0.1), rgba(255,0,0,0) 70.71%),
             linear-gradient(127deg, rgba(3, 204, 161, 0.1), rgba(0,255,0,0) 70.71%),

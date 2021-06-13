@@ -18,6 +18,7 @@ import Menu from "@material-ui/core/Menu";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import MoreIcon from "@material-ui/icons/MoreVert";
 
+import styled from 'styled-components';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -140,7 +141,7 @@ const MenuApp = () => {
               <Reloj user={user} alumno={alumno}/>
             </Typography>
           ) : (
-            "SEANI"
+            <Seani>SEANI</Seani>
           )}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
@@ -177,5 +178,12 @@ const MenuApp = () => {
     </div>
   );
 };
+
+
+const Seani = styled.p`
+  color: #ffffff;
+  font-size: 18px;
+  letter-spacing: 3px;
+`;
 
 export default MenuApp;
