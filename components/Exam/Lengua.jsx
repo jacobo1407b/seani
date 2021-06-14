@@ -7,6 +7,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import {useSelector} from 'react-redux'
 import {lenguaExam} from '../../utils/api';
 import Radio from "@material-ui/core/Radio";
+import Alert from '../Alert/Alert';
 
 const Lengua = ({ dtajs, dataAlumno, posision, todos }) => {
   const user = useSelector(state => state.user)
@@ -14,7 +15,9 @@ const Lengua = ({ dtajs, dataAlumno, posision, todos }) => {
   let valorActive = dataAlumno[conver] ? dataAlumno[conver] : "";
   const [tempResp, setTempResp] = useState({});
   const [selectValue, setSelectValue] = useState(valorActive.respuesta);
-  
+  const [estadoAlerta, cambiarEstadoAlerta]=useState(false);
+  const [alerta, cambiarAlerta]=useState({});
+
   useEffect(() => {
     setSelectValue(valorActive.respuesta);
   }, [valorActive.respuesta]);
@@ -38,12 +41,25 @@ const Lengua = ({ dtajs, dataAlumno, posision, todos }) => {
 
   const handlerSubmit = (e) => {
     e.preventDefault();
+    cambiarEstadoAlerta(false);
+    cambiarAlerta({});
 
     if (!tempResp?.pregunta || !tempResp?.pregunta) {
       return false;
     } else {
       dataAlumno[conver] = tempResp;
       lenguaExam({id:user?.uid,arre:dataAlumno})
+      .then(()=>{
+        cambiarEstadoAlerta(true);
+        cambiarAlerta({
+          tipo: 'exito', mensaje: 'Se guardo con exito'
+        });
+      }).catch((error)=>{
+        cambiarEstadoAlerta(true);
+        cambiarAlerta({
+          tipo: 'error', mensaje: 'Existio un error, intentalo nuevamente'
+        });
+      });
       //aqui para actualizar
       setTempResp({});
     }
@@ -109,6 +125,7 @@ const Lengua = ({ dtajs, dataAlumno, posision, todos }) => {
           </Button>
         </FormControl>
       </form>
+      <Alert tipo={alerta.tipo} mensaje={alerta.mensaje} estadoAlerta={estadoAlerta} cambiarEstadoAerta={cambiarEstadoAlerta} />
     </div>
   );
 };

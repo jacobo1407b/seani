@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import {useSelector} from 'react-redux'
 import {testExam} from '../../utils/api';
+import Alert from '../Alert/Alert';
 
 const Pregunta1 = ({ dtajs, dataAlumno, posision }) => {
   const user = useSelector(state => state.user)
@@ -14,6 +15,8 @@ const Pregunta1 = ({ dtajs, dataAlumno, posision }) => {
   let valorActive = dataAlumno[conver] ? dataAlumno[conver] : "";
   const [tempResp, setTempResp] = useState({});
   const [selectValue, setSelectValue] = useState(valorActive.respuesta);
+  const [estadoAlerta, cambiarEstadoAlerta]=useState(false);
+  const [alerta, cambiarAlerta]=useState({});
 
   useEffect(() => {
     setSelectValue(valorActive?.respuesta);
@@ -38,12 +41,25 @@ const Pregunta1 = ({ dtajs, dataAlumno, posision }) => {
 
   const handlerSubmit = (e) => {
     e.preventDefault();
+    cambiarEstadoAlerta(false);
+    cambiarAlerta({});
 
     if (!tempResp?.pregunta || !tempResp?.pregunta) {
       return false;
     } else {
       dataAlumno[conver] = tempResp;
       testExam({id:user?.uid,arre:dataAlumno})
+      .then(()=>{
+        cambiarEstadoAlerta(true);
+        cambiarAlerta({
+          tipo: 'exito', mensaje: 'Se guardo con exito'
+        });
+      }).catch(()=>{
+        cambiarEstadoAlerta(true);
+        cambiarAlerta({
+          tipo: 'error', mensaje: 'Existio un error, intentalo nuevamente'
+        });
+      })
       setTempResp({});
     }
   };
@@ -106,6 +122,7 @@ const Pregunta1 = ({ dtajs, dataAlumno, posision }) => {
           </Button>
         </FormControl>
       </form>
+      <Alert tipo={alerta.tipo} mensaje={alerta.mensaje} estadoAlerta={estadoAlerta} cambiarEstadoAerta={cambiarEstadoAlerta} />
     </div>
   );
 };

@@ -156,22 +156,14 @@ const home = () => {
               <li><p> <span>5.-</span> Se apague tu dispositivo.</p></li>
             </ul>
           </Errores>
-        </div>
-
-        <blockquote>
           <p className="flow-text">
             El sistema guardará las respuestas y el tiempo también, así que
             mantén la calma, en caso de cualquier duda sobre alguna situación
             puedes comunicarte al Grupo de{" "}
-            <a
-              href="https://t.me/utt_seani_2020"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Telegram.
-            </a>
+            <a href="https://t.me/utt_seani_2020" target="_blank" rel="noopener noreferrer">Telegram.</a>
           </p>
-        </blockquote>
+        </div>
+
         <Mesage><p>Módulos para la evaluación</p></Mesage>
         <Modulos analitico={handlerExam1} lectora={logica} matematico={mate} lengua={lengua}></Modulos>
         </ContainerGap>
@@ -218,6 +210,25 @@ const Errores = styled.div`
       }
       span{
         color: #268500;
+      }
+    }
+  }
+  @media (max-width: 992px){
+    width: 90%;
+    ul{
+      li{
+        p{
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  @media (max-width: 535px){
+    ul{
+      li{
+        p{
+          font-size: 14px;
+        }
       }
     }
   }

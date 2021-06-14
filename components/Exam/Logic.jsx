@@ -7,7 +7,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import Radio from "@material-ui/core/Radio";
 import {useSelector} from 'react-redux'
 import {testLogic} from '../../utils/api';
-
+import Alert from '../Alert/Alert';
 
 const Logic = ({ dtajs, dataAlumno, posision, todos }) => {
 
@@ -16,6 +16,8 @@ const Logic = ({ dtajs, dataAlumno, posision, todos }) => {
   let valorActive = dataAlumno[conver] ? dataAlumno[conver] : "";
   const [tempResp, setTempResp] = useState({});
   const [selectValue, setSelectValue] = useState(valorActive.respuesta);
+  const [estadoAlerta, cambiarEstadoAlerta]=useState(false);
+  const [alerta, cambiarAlerta]=useState({});
 
   useEffect(() => {
     setSelectValue(valorActive.respuesta);
@@ -40,12 +42,25 @@ const Logic = ({ dtajs, dataAlumno, posision, todos }) => {
 
   const handlerSubmit = (e) => {
     e.preventDefault();
+    cambiarEstadoAlerta(false);
+    cambiarAlerta({});
 
     if (!tempResp?.pregunta || !tempResp?.pregunta) {
       return false;
     } else {
       dataAlumno[conver] = tempResp;
       testLogic({id:user?.uid,arre:dataAlumno})
+      .then(()=>{
+        cambiarEstadoAlerta(true);
+        cambiarAlerta({
+          tipo: 'exito', mensaje: 'Se guardo con exito'
+        });
+      }).catch((error)=>{
+        cambiarEstadoAlerta(true);
+        cambiarAlerta({
+          tipo: 'error', mensaje: 'Existio un error, intentalo nuevamente'
+        });
+      })
       setTempResp({});
     }
   };
@@ -110,6 +125,7 @@ const Logic = ({ dtajs, dataAlumno, posision, todos }) => {
           </Button>
         </FormControl>
       </form>
+      <Alert tipo={alerta.tipo} mensaje={alerta.mensaje} estadoAlerta={estadoAlerta} cambiarEstadoAerta={cambiarEstadoAlerta} />
     </div>
   );
 };

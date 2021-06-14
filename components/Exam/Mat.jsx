@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import {useSelector} from 'react-redux'
 import {mateExam} from '../../utils/api';
+import Alert from '../Alert/Alert';
 
 const Mat = ({ dtajs, dataAlumno, posision, todos }) => {
   const user = useSelector(state => state.user)
@@ -15,7 +16,9 @@ const Mat = ({ dtajs, dataAlumno, posision, todos }) => {
   let valorActive = dataAlumno[conver] ? dataAlumno[conver] : "";
   const [tempResp, setTempResp] = useState({});
   const [selectValue, setSelectValue] = useState(valorActive.respuesta);
-  
+  const [estadoAlerta, cambiarEstadoAlerta]=useState(false);
+  const [alerta, cambiarAlerta]=useState({});
+
   useEffect(() => {
     setSelectValue(valorActive.respuesta);
   }, [valorActive.respuesta]);
@@ -38,6 +41,8 @@ const Mat = ({ dtajs, dataAlumno, posision, todos }) => {
   };
   const handlerSubmit = (e) => {
     e.preventDefault();
+    cambiarEstadoAlerta(false);
+    cambiarAlerta({});
 
     if (!tempResp?.pregunta || !tempResp?.pregunta) {
       return false;
@@ -45,6 +50,17 @@ const Mat = ({ dtajs, dataAlumno, posision, todos }) => {
       dataAlumno[conver] = tempResp;
       //updateMate(localStorage.getItem("document"), dataAlumno);
       mateExam({id:user?.uid,arre:dataAlumno})
+      .then(()=>{
+        cambiarEstadoAlerta(true);
+        cambiarAlerta({
+          tipo: 'exito', mensaje: 'Se guardo con exito'
+        });
+      }).catch((error)=>{
+        cambiarEstadoAlerta(true);
+        cambiarAlerta({
+          tipo: 'error', mensaje: 'Existio un error, intentalo nuevamente'
+        });
+      });
       setTempResp({});
     }
   };
@@ -108,6 +124,7 @@ const Mat = ({ dtajs, dataAlumno, posision, todos }) => {
           </Button>
         </FormControl>
       </form>
+      <Alert tipo={alerta.tipo} mensaje={alerta.mensaje} estadoAlerta={estadoAlerta} cambiarEstadoAerta={cambiarEstadoAlerta} />
     </div>
   );
 };
