@@ -5,7 +5,7 @@ import { Menu } from "semantic-ui-react";
 import {useSelector,useDispatch} from 'react-redux';
 import {accionAlumno} from '../../redux/accion'
 import {mateCancel,logiCancel,lenguaCancel,examCancel,getInitial} from '../../utils/api';
-
+import styled from 'styled-components';
 
 const Modal = () => {
 
@@ -86,12 +86,23 @@ const Modal = () => {
     }
   };
   
+  //<Menu.Item name="Terminar este módulo" onClick={primer} className="my-color" />
   return (
     <div>
-      <Menu.Item name="Terminar este módulo" onClick={primer} className="my-color" />
+      <BtnEnd onClick={primer} >Terminar este módulo</BtnEnd>
     </div>
   );
 };
+
+const BtnEnd = styled.button`
+  background: #ee9b00;
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 8px;
+  &:hover{
+    background: #da8403;
+  }
+`;
 
 export default Modal;
 

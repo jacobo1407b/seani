@@ -24,15 +24,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/home": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/home.js"
-    ],
     "/lengua": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/lengua.js"
+    ],
+    "/mate": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/mate.js"
     ]
   },
   "ampFirstPages": []
