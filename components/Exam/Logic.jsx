@@ -8,6 +8,7 @@ import Radio from "@material-ui/core/Radio";
 import {useSelector} from 'react-redux'
 import {testLogic} from '../../utils/api';
 import Alert from '../Alert/Alert';
+import styled from 'styled-components';
 
 const Logic = ({ dtajs, dataAlumno, posision, todos }) => {
 
@@ -67,7 +68,7 @@ const Logic = ({ dtajs, dataAlumno, posision, todos }) => {
 
   return (
     <div>
-      {dtajs?.pregunta_txt ? <h1>{dtajs?.pregunta_txt}</h1> : null}
+      {dtajs?.pregunta_txt ? <PreguntaTexto>{dtajs?.pregunta_txt}</PreguntaTexto> : null}
       {dtajs?.pregunta_url ? (
         <img
           className="responsive-img materialboxed"
@@ -129,5 +130,16 @@ const Logic = ({ dtajs, dataAlumno, posision, todos }) => {
     </div>
   );
 };
+
+const PreguntaTexto = styled.p`
+  padding: 15px 0px;
+  color: #000;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  @media (max-width: 600px){
+    font-size: 18px;
+  }
+`;
 
 export default Logic;
