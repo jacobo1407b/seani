@@ -1,6 +1,6 @@
 export const host = "http://localhost:3000";
 //coleccion a conectarse
-export const collection = "e2-2021";
+export const collection = "e3-2021";
 //configuracion firebase
 export const firebaseConfig = {
   apiKey: "AIzaSyAyiLjNMCdX4vkB_kM0n8D_KE-tWhzGGg4",
