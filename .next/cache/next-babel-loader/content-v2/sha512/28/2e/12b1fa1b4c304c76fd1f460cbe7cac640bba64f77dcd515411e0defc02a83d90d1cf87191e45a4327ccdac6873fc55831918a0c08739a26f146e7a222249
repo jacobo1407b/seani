@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { auth } from \"../../utils/firebase\";\nexport default (async (req, res) => {\n  try {\n    await auth.signOut();\n    return res.status(200).json({\n      logout: true\n    });\n  } catch (error) {\n    return res.status(401).json({\n      error,\n      logout: false\n    });\n  }\n});","map":null,"metadata":{},"sourceType":"module"}

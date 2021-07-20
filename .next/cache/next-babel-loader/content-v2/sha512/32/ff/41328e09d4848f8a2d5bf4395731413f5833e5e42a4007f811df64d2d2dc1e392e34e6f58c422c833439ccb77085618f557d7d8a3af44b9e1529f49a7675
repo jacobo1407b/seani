@@ -1,1 +1,0 @@
-{"ast":null,"code":"export { accionTest } from './accionTest';\nexport { accionUser } from './accionUser';\nexport { accionTime } from './accionTime';\nexport { accionTipe } from './accionTipe';\nexport { accionAlumno } from './accionAlumno';","map":null,"metadata":{},"sourceType":"module"}

@@ -1,1 +1,0 @@
-{"ast":null,"code":"export const host = \"http://localhost:3000\";\nexport const collection = \"alumnos3\";","map":null,"metadata":{},"sourceType":"module"}
