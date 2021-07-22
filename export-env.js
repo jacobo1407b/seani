@@ -22,10 +22,10 @@ const vals = varsToExport
 const jsFile = `${__dirname}/utils/variables.js`
 writeFileSync(jsFile,
   `// WARN: This is a generated file. Do not modify!
+    export * from './constante'
     export const collection = ${getSerializedVal('collection')};
     //ya no es nesesario modificar las credenciales, en su lugar crear un ".env" y meter toda la info
     //poner fecha en cuando se aplicara
-    export const fechaAplicacion = new Date("2021-30-26T20:00");
     export const fechaActual = new Date(Date.now());
 
     export  const firebaseConfig  = {
