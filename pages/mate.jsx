@@ -3,24 +3,17 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { accionTest, accionTipe } from "../redux/accion";
 import Pagination from "@material-ui/lab/Pagination";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStylesLengua } from 'assets/style-js'
 import { Container } from "semantic-ui-react";
-import data from "../assets/json/examen_PensaMatematico.json";
-import Maste from "../components/Exam/Mat";
+import data from "assets/json/examen_PensaMatematico.json";
+import Maste from "components/Exam/Mat";
 import Head from "next/head";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      marginTop: theme.spacing(2),
-    },
-  },
-}));
 
 const mate = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const classes = useStyles();
+  const classes = useStylesLengua();
   const alumno = useSelector((state) => state.alumno);
 
   useEffect(() => {
@@ -36,7 +29,6 @@ const mate = () => {
     };
   }, []);
   const handleChange = (event, value) => {
-    //window.location.replace(`/mate?page=${value}`);
     router.push(`/mate?page=${value}`);
   };
 
@@ -52,7 +44,7 @@ const mate = () => {
         dtajs={data[parseInt(numero)]}
         dataAlumno={alumno?.data?.matematico ? alumno?.data?.matematico : []}
         todos={alumno?.data}
-        posision={numero}
+        posision={parseInt(numero)}
       />
     );
   }

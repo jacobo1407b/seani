@@ -1,31 +1,12 @@
-import { host ,collection} from "./variables";
+import {collection} from "./variables";
 import {db,auth} from './firebase'
 import 'isomorphic-fetch'
-var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
-//var raw = JSON.stringify(respuesta.user);
-
-const raw = (data, tipe) => {
-  if (!tipe) {
-    return {};
-  }
-  return {
-    method: tipe,
-    headers: myHeaders,
-    body: JSON.stringify(data),
-    redirect: "follow",
-  };
-};
 
 export const logIn =async (data)=>{
   return auth.signInWithEmailAndPassword(
     data.email,
     data.password
   )
-}
-//get info user
-export const getUser =(data)=>{
-    return fetch(`${host}/api/user`,raw(data,"POST")).then(dat =>dat.json());
 }
 //active socket
 export const openSocket=async (data)=>{

@@ -1,26 +1,19 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import { makeStyles } from "@material-ui/core/styles";
+import { useStylesLengua } from '../assets/style-js'
 import Pagination from "@material-ui/lab/Pagination";
 import { Container } from "semantic-ui-react";
 import { useDispatch,useSelector} from "react-redux";
-import { accionTest, accionTipe } from "../redux/accion";
-import data from "../assets/json/exam_PensaLogic.json";
-import Logic from "../components/Exam/Logic";
+import { accionTest, accionTipe } from "redux/accion";
+import data from "assets/json/exam_PensaLogic.json";
+import Logic from "components/Exam/Logic";
 import Head from "next/head";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      marginTop: theme.spacing(2),
-    },
-  },
-}));
 
 const logico = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const classes = useStyles();
+  const classes = useStylesLengua();
   const alumno = useSelector(state => state.alumno)
 
   useEffect(() => {

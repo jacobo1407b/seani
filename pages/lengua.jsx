@@ -1,27 +1,19 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useDispatch,useSelector} from "react-redux";
-import { accionTest, accionTipe } from "../redux/accion";
-import data from "../assets/json/exam_EstrucLengua.json";
+import {accionTipe, accionTest} from 'redux/accion'
+import data from 'assets/json/exam_EstrucLengua.json'
 import Pagination from "@material-ui/lab/Pagination";
-import { makeStyles } from "@material-ui/core/styles";
+import {useStylesLengua} from 'assets/style-js'
 import { Container } from "semantic-ui-react";
-import Lenguaje from "../components/Exam/Lengua";
+import Lenguaje from "components/Exam/Lengua";
 import Head from "next/head";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      marginTop: theme.spacing(2),
-    },
-  },
-}));
 
 const lengua = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const classes = useStyles();
-  const user = useSelector(state => state.user)
+  const classes = useStylesLengua();
   const alumno = useSelector(state => state.alumno)
 
   useEffect(() => {
@@ -39,9 +31,7 @@ const lengua = () => {
   }, []);
 
   const handleChange = (event, value) => {
-    router.push(`/lengua?page=${value}`);
-    //window.location.replace(`/lengua?page=${value}`)
-  };
+    router.push(`/lengua?page=${value}`);  };
 
   function elegir(numero) {
     if (numero <= 0) {

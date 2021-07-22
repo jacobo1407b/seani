@@ -5,11 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "next",
+    "dev": "npm run export-env && next",
     "start": "next start",
-    "build": "next build",
-    "dev:cus": "node server.js",
-    "start:cus": "NODE_ENV=production node server.js"
+    "build": "npm run export-env && next build",
+    "export-env":"node export-env.js"
   },
   "keywords": [],
   "author": "",
@@ -32,6 +31,7 @@
     "next-redux-wrapper": "^6.0.2",
     "next-videos": "^1.4.0",
     "notistack": "^1.0.5",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.3",
@@ -42,7 +42,8 @@
     "socket.io": "^4.0.1",
     "socket.io-client": "^4.0.1",
     "styled-components": "^5.2.3",
-    "sweetalert2": "^10.16.3"
+    "sweetalert2": "^10.16.3",
+    "swr": "^0.5.6"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.12.0"

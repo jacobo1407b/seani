@@ -2,6 +2,7 @@
 @import url("./main.css");
 @import url("./preguntas.css");
 @import url("./reloj.css");
+@import url('./loader.css');
 @font-face {
   font-family: Poppins-Regular;
   src: url(https://colorlib.com/etc/lf/Login_v1/fonts/poppins/Poppins-Regular.ttf);

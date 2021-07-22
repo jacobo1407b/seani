@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Radio from "@material-ui/core/Radio";
-////import { updateMate } from "../../utils/DataBase";
+import PropTypes from 'prop-types';
+//materiañ
 import FormControl from "@material-ui/core/FormControl";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
+//custom
 import {useSelector} from 'react-redux'
-import {mateExam} from '../../utils/api';
+import {mateExam} from 'utils/api';
 
-const Mat = ({ dtajs, dataAlumno, posision, todos }) => {
+const Mat = ({ dtajs, dataAlumno, posision }) => {
+
   const user = useSelector(state => state.user)
   let conver = parseInt(posision);
   let valorActive = dataAlumno[conver] ? dataAlumno[conver] : "";
@@ -21,12 +24,9 @@ const Mat = ({ dtajs, dataAlumno, posision, todos }) => {
   }, [valorActive.respuesta]);
 
   useEffect(()=>{
-  
-    let respValue = dataAlumno[posision].respuesta;
-
+    let respValue = dataAlumno[posision]?.respuesta;
     respValue != "" ? console.log('contesta porfa') : 
     setSelectValue();
-
   }, [conver])
 
   const handlerElegirRespuesta = (e) => {
@@ -43,7 +43,6 @@ const Mat = ({ dtajs, dataAlumno, posision, todos }) => {
       return false;
     } else {
       dataAlumno[conver] = tempResp;
-      //updateMate(localStorage.getItem("document"), dataAlumno);
       mateExam({id:user?.uid,arre:dataAlumno})
       setTempResp({});
     }
@@ -112,4 +111,9 @@ const Mat = ({ dtajs, dataAlumno, posision, todos }) => {
   );
 };
 
+Mat.propTypes ={
+  dtajs: PropTypes.object,
+  dataAlumno:PropTypes.array,
+  posision: PropTypes.number
+}
 export default Mat;

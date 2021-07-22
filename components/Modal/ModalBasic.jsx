@@ -3,17 +3,19 @@ import {useRouter} from 'next/router'
 import Swal from "sweetalert2";
 import { Menu } from "semantic-ui-react";
 import {useSelector,useDispatch} from 'react-redux';
-import {accionAlumno} from '../../redux/accion'
-import {mateCancel,logiCancel,lenguaCancel,examCancel,getInitial} from '../../utils/api';
+import {accionAlumno} from 'redux/accion'
+import {mateCancel,logiCancel,lenguaCancel,examCancel,getInitial} from 'utils/api';
 
 
 const Modal = () => {
-
+  //hooks
   const dispatch = useDispatch()
   const router = useRouter();
+  //state
   const typeTest = useSelector(state => state.typeTest);
   const time = useSelector(state => state.time);
   const user = useSelector(state => state.user);
+  
   const primer = () => {
     if (time > 0) {
       Swal.fire({

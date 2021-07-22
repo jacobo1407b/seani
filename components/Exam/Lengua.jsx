@@ -1,41 +1,44 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
+//material
 import FormControl from "@material-ui/core/FormControl";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
-import {useSelector} from 'react-redux'
-import {lenguaExam} from '../../utils/api';
 import Radio from "@material-ui/core/Radio";
+//custom
+import {useSelector} from 'react-redux'
+import {lenguaExam} from 'utils/api';
 
-const Lengua = ({ dtajs, dataAlumno, posision, todos }) => {
-  const user = useSelector(state => state.user)
+
+const Lengua = ({ dtajs, dataAlumno, posision }) => {
   let conver = parseInt(posision);
   let valorActive = dataAlumno[conver] ? dataAlumno[conver] : "";
+  //state
+  const user = useSelector(state => state.user)
   const [tempResp, setTempResp] = useState({});
   const [selectValue, setSelectValue] = useState(valorActive.respuesta);
+  
+  
   
   useEffect(() => {
     setSelectValue(valorActive.respuesta);
   }, [valorActive.respuesta]);
 
   useEffect(()=>{
-
     let respValue = dataAlumno[posision].respuesta;
-
     respValue != "" ? console.log('contesta porfa') : 
     setSelectValue();
-
   }, [conver])
 
+  
   const handlerElegirRespuesta = (e) => {
     setTempResp({
       pregunta: dtajs?._id,
       respuesta: e.target.value,
     });
     setSelectValue(e.target.value);
-    
-    
   };
 
   const handlerSubmit = (e) => {
@@ -115,4 +118,9 @@ const Lengua = ({ dtajs, dataAlumno, posision, todos }) => {
   );
 };
 
+Lengua.propTypes = {
+  dtajs: PropTypes.object,
+  dataAlumno:PropTypes.array,
+  posision: PropTypes.number
+}
 export default Lengua;

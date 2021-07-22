@@ -4,7 +4,7 @@ import {useRouter} from 'next/router'
 import MenuItem from "@material-ui/core/MenuItem";
 import DoneIcon from "@material-ui/icons/Done";
 import IconButton from "@material-ui/core/IconButton";
-import {accionAlumno} from '../../redux/accion'
+import {accionAlumno} from 'redux/accion'
 import { useSelector,useDispatch} from "react-redux";
 import {
   mateCancel,
@@ -12,11 +12,13 @@ import {
   lenguaCancel,
   examCancel,
   getInitial
-} from "../../utils/api";
+} from "utils/api";
 
 const NoResponsive = () => {
+  //hooks
   const dispatch = useDispatch()
   const router = useRouter();
+  //state
   const typeTest = useSelector((state) => state.typeTest);
   const time = useSelector((state) => state.time);
   const user = useSelector((state) => state.user);

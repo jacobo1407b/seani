@@ -1,69 +1,58 @@
-import React, { Fragment, useEffect,useState } from "react";
+import React, { Fragment } from "react";
 import { Container, Button, Grid } from "semantic-ui-react";
 import { useSnackbar } from "notistack";
-import Logo from "../assets/images/utt.png";
+import Logo from 'assets/images/utt.png'
+import Escene from 'components/Escena';
+import Tipe from 'components/Tipe';
 import { useRouter } from "next/router";
-import Vid from "../assets/video/camara-micro.mp4";
-import Qwerty from "../assets/images/qwerty.mp4";
+import Vid from 'assets/video/camara-micro.mp4';
+import Qwerty from 'assets/images/qwerty.mp4'
 import Head from "next/head";
 import { useSelector } from "react-redux";
 
 const home = () => {
   const router = useRouter();
   const alumno = useSelector((state) => state.alumno);
-  const user = useSelector((state) => state.user);
   const { enqueueSnackbar } = useSnackbar();
-  useEffect(() => {
-    console.log(user)
-      if (!user) {
-        router.push("/");
-      }
-    
-  }, []);
 
   const handlerExam1 = () => {
-    console.log(alumno.activeExam1);
     if (!alumno.data.activeExam1) {
-      enqueueSnackbar("Este examen esta desactivado", {
+      enqueueSnackbar("Este modulo esta desactivado", {
         variant: "info",
       });
       return false;
     } else {
-      //window.location.replace(`/exam?page=1`)
       router.push("/exam?page=1");
     }
   };
 
   const logica = () => {
     if (!alumno.data.activeLogic) {
-      enqueueSnackbar("Este examen esta desactivado", {
+      enqueueSnackbar("Este modulo esta desactivado", {
         variant: "info",
       });
       return false;
     } else {
-      //window.location.replace(`/logico?page=1`)
       router.push("/logico?page=1");
     }
   };
   const mate = () => {
     if (!alumno.data.activeMat) {
-      enqueueSnackbar("Este examen esta desactivado", {
+      enqueueSnackbar("Este modulo esta desactivado", {
         variant: "info",
       });
       return false;
     } else {
-      //window.location.replace(`/mate?page=1`)
       router.push("/mate?page=1");
     }
   };
   const lengua = () => {
     if (!alumno.data.activeLengua) {
-      enqueueSnackbar("Este examen esta desactivado", {
+      enqueueSnackbar("Este modulo esta desactivado", {
         variant: "info",
       });
       return false;
     } else {
-      //window.location.replace(`/lengua?page=1`)
       router.push("/lengua?page=1");
     }
   };
@@ -91,14 +80,7 @@ const home = () => {
           </blockquote>
         </Grid.Row>
         <Grid.Row>
-          <div className="card-panel w-100">
-            <span className="blue-text text-darken-2">
-              <p className="flow-text">Lógico / Matemáticas</p>
-            </span>
-            <span className="blue-text text-darken-2">
-              <p className="flow-text">Comprensión lectora</p>
-            </span>
-          </div>
+          <Tipe />
         </Grid.Row>
 
         <blockquote>
@@ -140,26 +122,7 @@ const home = () => {
           </div>
         </blockquote>
 
-        <div className="card-panel">
-          <p className="flow-text">
-            En caso de que te encuentres en estas situaciones:
-          </p>
-          <span className="red-text text-darken-2">
-            <p className="flow-text">Conexión a internet muy inestable.</p>
-          </span>
-          <span className="red-text text-darken-2">
-            <p className="flow-text">Cerrar la pestaña por error.</p>
-          </span>
-          <span className="red-text text-darken-2">
-            <p className="flow-text">Se termine la batería a tu celular.</p>
-          </span>
-          <span className="red-text text-darken-2">
-            <p className="flow-text">Se interrumpa la energía eléctrica.</p>
-          </span>
-          <span className="red-text text-darken-2">
-            <p className="flow-text">Se apague tu dispositivo.</p>
-          </span>
-        </div>
+        <Escene />
         <blockquote>
           <p className="flow-text">
             El sistema guardará las respuestas y el tiempo también, así que
@@ -174,7 +137,7 @@ const home = () => {
             </a>
           </p>
         </blockquote>
-        <div className="container">
+        <Container>
           <Grid columns="equal">
             <Grid.Row>
               <Button
@@ -221,7 +184,7 @@ const home = () => {
               />
             </Grid.Row>
           </Grid>
-        </div>
+        </Container>
       </Fragment>
     </Container>
   );

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import data from "../assets/json/Examen_PensaAnlitico.json";
 import { useDispatch,useSelector} from "react-redux";
 import { accionTest, accionTipe } from "../redux/accion";
-import { useStyleExam } from "../assets/style";
+import { useStylesLengua } from "../assets/style-js";
 import Pagination from "@material-ui/lab/Pagination";
 import Pagina1 from "../components/Exam/Pregunta1";
 import Head from "next/head";
@@ -11,7 +11,7 @@ import Head from "next/head";
 const exam = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const classes = useStyleExam();
+  const classes = useStylesLengua();
   const alumno = useSelector(state => state.alumno)
 
   useEffect(() => {

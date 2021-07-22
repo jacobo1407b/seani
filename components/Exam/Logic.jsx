@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import PropTypes from 'prop-types';
 import FormControl from "@material-ui/core/FormControl";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -6,16 +7,16 @@ import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import Radio from "@material-ui/core/Radio";
 import {useSelector} from 'react-redux'
-import {testLogic} from '../../utils/api';
+import {testLogic} from 'utils/api';
 
 
-const Logic = ({ dtajs, dataAlumno, posision, todos }) => {
-
-  const user = useSelector(state => state.user)
+const Logic = ({ dtajs, dataAlumno, posision }) => {
   let conver = parseInt(posision);
   let valorActive = dataAlumno[conver] ? dataAlumno[conver] : "";
+
   const [tempResp, setTempResp] = useState({});
   const [selectValue, setSelectValue] = useState(valorActive.respuesta);
+  const user = useSelector(state => state.user)
 
   useEffect(() => {
     setSelectValue(valorActive.respuesta);
@@ -115,4 +116,9 @@ const Logic = ({ dtajs, dataAlumno, posision, todos }) => {
   );
 };
 
+Logic.propTypes = {
+  dtajs: PropTypes.object,
+  dataAlumno:PropTypes.array,
+  posision: PropTypes.number
+}
 export default Logic;

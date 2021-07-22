@@ -1,19 +1,25 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
+//materiañ
 import Radio from "@material-ui/core/Radio";
 import FormControl from "@material-ui/core/FormControl";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
+//custom
 import {useSelector} from 'react-redux'
-import {testExam} from '../../utils/api';
+import {testExam} from 'utils/api';
 
 const Pregunta1 = ({ dtajs, dataAlumno, posision }) => {
-  const user = useSelector(state => state.user)
   let conver = parseInt(posision);
   let valorActive = dataAlumno[conver] ? dataAlumno[conver] : "";
+  
+
+  //state
   const [tempResp, setTempResp] = useState({});
   const [selectValue, setSelectValue] = useState(valorActive.respuesta);
+  const user = useSelector(state => state.user)
 
   useEffect(() => {
     setSelectValue(valorActive?.respuesta);
@@ -23,7 +29,7 @@ const Pregunta1 = ({ dtajs, dataAlumno, posision }) => {
   
     let respValue = dataAlumno[posision].respuesta;
 
-    respValue != "" ? console.log('contesta porfa') : 
+    respValue != "" ? console.log('contestame porfavir XDDD') : 
     setSelectValue();
 
   }, [conver])
@@ -110,4 +116,9 @@ const Pregunta1 = ({ dtajs, dataAlumno, posision }) => {
   );
 };
 
+Pregunta1.propTypes = {
+  dtajs: PropTypes.object,
+  dataAlumno:PropTypes.array,
+  posision: PropTypes.number
+}
 export default Pregunta1;

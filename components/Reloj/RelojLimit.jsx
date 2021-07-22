@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import { useDispatch } from "react-redux";
-import { accionTime, accionAlumno } from "../../redux/accion";
+import { accionTime, accionAlumno } from "redux/accion";
 import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
-import { allCancel, openSocket, getInitial } from "../../utils/api";
+import { allCancel, openSocket, getInitial } from "utils/api";
 
 function RelojLimit({ user, alumno }) {
   useEffect(() => {
@@ -15,9 +16,11 @@ function RelojLimit({ user, alumno }) {
 }
 
 function TimerInternal({ user, alumno }) {
+  //hooks
   const dispatch = useDispatch();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
+  //state
   const [seconds, setSeconds] = useState(alumno?.data?.time);
   const [timer, setTimer] = useState({ h: null, m: null, s: null });
 
@@ -68,4 +71,13 @@ function TimerInternal({ user, alumno }) {
   );
 }
 
+RelojLimit.propTypes = {
+  user: PropTypes.object,
+  alumno: PropTypes.object
+}
+
+TimerInternal.propTypes = {
+  user: PropTypes.object,
+  alumno: PropTypes.object
+}
 export default RelojLimit;

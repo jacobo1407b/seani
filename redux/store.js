@@ -43,22 +43,11 @@ function updateState(state = initialState, action) {
         ...state,
       };
   }
-  /**
-   * return state;
-   */
-}/*
-const makeStore = (initialState = exampleInitialState) => createStore(
-  reducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(thunkMiddleware)),
-);
-
-export default makeStore;*/
+}
 
 const store = createStore(
   updateState,
   composeWithDevTools()
-  //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 export default store;
