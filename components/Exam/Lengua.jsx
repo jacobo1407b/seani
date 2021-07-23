@@ -10,7 +10,8 @@ import Radio from "@material-ui/core/Radio";
 //custom
 import {useSelector} from 'react-redux'
 import {lenguaExam} from 'utils/api';
-
+import {IMG} from './styled';
+import Alert from '../Alert/Alert';
 
 const Lengua = ({ dtajs, dataAlumno, posision }) => {
   let conver = parseInt(posision);
@@ -19,8 +20,8 @@ const Lengua = ({ dtajs, dataAlumno, posision }) => {
   const user = useSelector(state => state.user)
   const [tempResp, setTempResp] = useState({});
   const [selectValue, setSelectValue] = useState(valorActive.respuesta);
-  
-  
+  const [alertState, changeAlertState]=useState(false);
+  const [alert, changeAlert]=useState({});
   
   useEffect(() => {
     setSelectValue(valorActive.respuesta);
@@ -49,7 +50,17 @@ const Lengua = ({ dtajs, dataAlumno, posision }) => {
     } else {
       dataAlumno[conver] = tempResp;
       lenguaExam({id:user?.uid,arre:dataAlumno})
-      //aqui para actualizar
+      .then(()=>{
+        changeAlertState(true);
+        changeAlert({
+          tipo: 'exito', mensaje: 'Se guardo con exito'
+        });
+      }).catch(()=>{
+        changeAlertState(true);
+        changeAlert({
+          tipo: 'error', mensaje: 'Existio un error, intentalo nuevamente'
+        });
+      })
       setTempResp({});
     }
   };
@@ -58,7 +69,7 @@ const Lengua = ({ dtajs, dataAlumno, posision }) => {
     <div className="container">
       {dtajs?.pregunta_txt ? <h1>{dtajs?.pregunta_txt}</h1> : null}
       {dtajs?.pregunta_url ? (
-        <img
+        <IMG
           className="responsive-img materialboxed"
           src={dtajs?.pregunta_url}
           alt="pregunta"
@@ -114,6 +125,7 @@ const Lengua = ({ dtajs, dataAlumno, posision }) => {
           </Button>
         </FormControl>
       </form>
+      <Alert tipo={alert.tipo} mensaje={alert.mensaje} estadoAlerta={alertState} cambiarEstadoAerta={changeAlertState} />
     </div>
   );
 };

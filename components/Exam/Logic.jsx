@@ -8,7 +8,8 @@ import SaveIcon from "@material-ui/icons/Save";
 import Radio from "@material-ui/core/Radio";
 import {useSelector} from 'react-redux'
 import {testLogic} from 'utils/api';
-
+import {IMG} from './styled';
+import Alert from '../Alert/Alert';
 
 const Logic = ({ dtajs, dataAlumno, posision }) => {
   let conver = parseInt(posision);
@@ -16,6 +17,8 @@ const Logic = ({ dtajs, dataAlumno, posision }) => {
 
   const [tempResp, setTempResp] = useState({});
   const [selectValue, setSelectValue] = useState(valorActive.respuesta);
+  const [alertState, changeAlertState]=useState(false);
+  const [alert, changeAlert]=useState({});
   const user = useSelector(state => state.user)
 
   useEffect(() => {
@@ -36,7 +39,7 @@ const Logic = ({ dtajs, dataAlumno, posision }) => {
       pregunta: dtajs?._id,
       respuesta: e.target.value,
     });
-    console.log(datajs?._id);
+    //console.log(datajs?._id);
     setSelectValue(e.target.value);
   };
 
@@ -48,6 +51,17 @@ const Logic = ({ dtajs, dataAlumno, posision }) => {
     } else {
       dataAlumno[conver] = tempResp;
       testLogic({id:user?.uid,arre:dataAlumno})
+      .then(()=>{
+        changeAlertState(true);
+        changeAlert({
+          tipo: 'exito', mensaje: 'Se guardo con exito'
+        });
+      }).catch(()=>{
+        changeAlertState(true);
+        changeAlert({
+          tipo: 'error', mensaje: 'Existio un error, intentalo nuevamente'
+        });
+      })
       setTempResp({});
     }
   };
@@ -56,7 +70,7 @@ const Logic = ({ dtajs, dataAlumno, posision }) => {
     <div>
       {dtajs?.pregunta_txt ? <h1>{dtajs?.pregunta_txt}</h1> : null}
       {dtajs?.pregunta_url ? (
-        <img
+        <IMG
           className="responsive-img materialboxed"
           src={dtajs?.pregunta_url}
           alt="pregunta"
@@ -112,6 +126,7 @@ const Logic = ({ dtajs, dataAlumno, posision }) => {
           </Button>
         </FormControl>
       </form>
+      <Alert tipo={alert.tipo} mensaje={alert.mensaje} estadoAlerta={alertState} cambiarEstadoAerta={changeAlertState} />
     </div>
   );
 };
