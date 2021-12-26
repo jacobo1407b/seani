@@ -27,7 +27,7 @@ const Modulos = ({analitico, lectora, matematico, lengua}) => {
                     return(
                         <div className={clase} onClick={()=>accion(doc.ref)}>
                             <h2>{doc.nombre}</h2>
-                            <img src={doc.img} alt=""/>
+                            <img src={doc.img} alt="img"/>
                         </div>
                     )
                 })

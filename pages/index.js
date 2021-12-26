@@ -6,6 +6,7 @@ import { logIn, getInitial } from 'utils/api'
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
+import Cookies from 'cookies'
 import { fechaActual, fechaAplicacion } from 'utils/variables'
 import { accionUser, accionAlumno } from "../redux/accion";
 import Swal from "sweetalert2";
@@ -48,6 +49,7 @@ const index = ({ user }) => {
       setIsloadin(true);
       logIn(formDta)
         .then(async (response) => {
+          document.cookie = `user=${JSON.stringify(response.user)}; max-age=3600; path=/`;
           dispatch(accionUser(response.user));
           const { data } = await getInitial(response.user.uid);
           dispatch(accionAlumno({ data }));
@@ -116,4 +118,21 @@ const index = ({ user }) => {
   );
 };
 
+export async function getServerSideProps(ctx) {
+  const cookies = new Cookies(ctx?.req, ctx?.res);
+  var isSesion = cookies.get('user');
+  const login = isSesion ? true : false
+  if (login) {
+    return {
+      redirect: {
+        destination: '/home',
+        permanent: false
+      },
+      props: { login }
+    }
+  }
+  return {
+    props: { login }
+  }
+}
 export default index;

@@ -8,7 +8,7 @@
     "dev": "npm run export-env && next",
     "start": "next start",
     "build": "npm run export-env && next build",
-    "export-env":"node export-env.js"
+    "export-env": "node export-env.js"
   },
   "keywords": [],
   "author": "",

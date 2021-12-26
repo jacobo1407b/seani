@@ -3,7 +3,7 @@ import React from 'react';
 class Robots extends React.Component {
     static async getInitialProps({ res }) {
         res.setHeader('Content-Type', 'text/plain');
-        res.write("Sitemap: https://seani.vercel.app/sitemap.xml  a sale xdd");
+        res.write("Sitemap: https://seani.vercel.app/sitemap.xml");
         res.end();
     }
 

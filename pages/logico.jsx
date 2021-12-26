@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
+import Cookies from 'cookies'
 import { useStylesLengua } from '../assets/style-js'
 import Pagination from "@material-ui/lab/Pagination";
 import { Container } from "semantic-ui-react";
@@ -74,3 +75,21 @@ const logico = () => {
 };
 
 export default logico;
+
+export async function getServerSideProps(ctx) {
+  const cookies = new Cookies(ctx?.req, ctx?.res);
+  var isSesion = cookies.get('user');
+  const login = isSesion ? true : false
+  if (!login) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      },
+      props: { login }
+    }
+  }
+  return {
+    props: { login }
+  }
+}

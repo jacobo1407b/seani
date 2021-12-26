@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Container, Button, Grid } from "semantic-ui-react";
 import { useSnackbar } from "notistack";
 import Logo from 'assets/images/utt.png'
+import Cookies from 'cookies'
 import Escene from 'components/Escena';
 import Tipe from 'components/Tipe';
 import { useRouter } from "next/router";
@@ -81,7 +82,7 @@ const home = () => {
           </blockquote>
         </Grid.Row>
         <Grid.Row>
-          <Tipe/>
+          <Tipe />
         </Grid.Row>
 
         <blockquote>
@@ -159,3 +160,21 @@ const TextIng = ({ dataAlumno }) => {
 };
 
 export default home;
+
+export async function getServerSideProps(ctx) {
+  const cookies = new Cookies(ctx?.req, ctx?.res);
+  var isSesion = cookies.get('user');
+  const login = isSesion ? true : false
+  if (!login) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      },
+      props: { login }
+    }
+  }
+  return {
+    props: { login }
+  }
+}
