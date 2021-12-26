@@ -11,7 +11,7 @@ const Layout = ({children}) => {
 
     auth.onAuthStateChanged(async(currentUser)=>{
         if(currentUser){
-            const {data} = await getInitial(currentUser.uid)
+            const {data} = await getInitial(currentUser.uid);
             dispatch(accionUser(currentUser))
             dispatch(accionAlumno({data}))
         }else{

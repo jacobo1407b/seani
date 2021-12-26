@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Cookies from 'cookies'
-import { useDispatch,useSelector} from "react-redux";
-import {accionTipe, accionTest} from 'redux/accion'
+import { useDispatch, useSelector } from "react-redux";
+import { accionTipe, accionTest } from 'redux/accion'
 import data from 'assets/json/exam_EstrucLengua.json'
 import Pagination from "@material-ui/lab/Pagination";
-import {useStylesLengua} from 'assets/style-js'
+import { useStylesLengua } from 'assets/style-js'
 import { Container } from "semantic-ui-react";
 import Lenguaje from "components/Exam/Lengua";
 import Head from "next/head";
@@ -18,13 +18,8 @@ const lengua = () => {
   const alumno = useSelector(state => state.alumno)
 
   useEffect(() => {
-      dispatch(accionTest(true));
-      dispatch(accionTipe("Estructura de la lengua"));
-      if (!alumno?.data?.activeLengua) {
-        router.push("/home");
-        
-      }
- 
+    dispatch(accionTest(true));
+    dispatch(accionTipe("Estructura de la lengua"));
     return () => {
       dispatch(accionTest(false));
       dispatch(accionTipe(""));
@@ -32,7 +27,8 @@ const lengua = () => {
   }, []);
 
   const handleChange = (event, value) => {
-    router.push(`/lengua?page=${value}`);  };
+    router.push(`/lengua?page=${value}`);
+  };
 
   function elegir(numero) {
     if (numero <= 0) {
@@ -80,11 +76,22 @@ export default lengua;
 export async function getServerSideProps(ctx) {
   const cookies = new Cookies(ctx?.req, ctx?.res);
   var isSesion = cookies.get('user');
-  const login = isSesion ? true : false
+  const login = isSesion ? true : false;
+  var active = cookies.get('activeLengua');
+  var examActive = JSON.parse(active)
   if (!login) {
     return {
       redirect: {
         destination: '/',
+        permanent: false
+      },
+      props: { login }
+    }
+  }
+  if (login && !examActive) {
+    return {
+      redirect: {
+        destination: '/home',
         permanent: false
       },
       props: { login }

@@ -4,7 +4,7 @@ import Cookies from 'cookies'
 import { useStylesLengua } from '../assets/style-js'
 import Pagination from "@material-ui/lab/Pagination";
 import { Container } from "semantic-ui-react";
-import { useDispatch,useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { accionTest, accionTipe } from "redux/accion";
 import data from "assets/json/exam_PensaLogic.json";
 import Logic from "components/Exam/Logic";
@@ -18,12 +18,8 @@ const logico = () => {
   const alumno = useSelector(state => state.alumno)
 
   useEffect(() => {
-      dispatch(accionTest(true));
-      dispatch(accionTipe("Comprensión lectora"));
-      if (!alumno?.data?.activeLogic) {
-        router.push("/home");
-      }
-    
+    dispatch(accionTest(true));
+    dispatch(accionTipe("Comprensión lectora"));
 
     return () => {
       dispatch(accionTest(false));
@@ -79,11 +75,22 @@ export default logico;
 export async function getServerSideProps(ctx) {
   const cookies = new Cookies(ctx?.req, ctx?.res);
   var isSesion = cookies.get('user');
+  var active = cookies.get('activeLogic');
+  var examActive = JSON.parse(active)
   const login = isSesion ? true : false
   if (!login) {
     return {
       redirect: {
         destination: '/',
+        permanent: false
+      },
+      props: { login }
+    }
+  }
+  if (login && !examActive) {
+    return {
+      redirect: {
+        destination: '/home',
         permanent: false
       },
       props: { login }

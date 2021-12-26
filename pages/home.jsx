@@ -18,7 +18,7 @@ const home = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const handlerExam1 = () => {
-    if (!alumno.data.activeExam1) {
+    if (!alumno?.data?.activeExam1) {
       enqueueSnackbar("Este modulo esta desactivado", {
         variant: "info",
       });
@@ -29,7 +29,7 @@ const home = () => {
   };
 
   const logica = () => {
-    if (!alumno.data.activeLogic) {
+    if (!alumno?.data?.activeLogic) {
       enqueueSnackbar("Este modulo esta desactivado", {
         variant: "info",
       });
@@ -39,7 +39,7 @@ const home = () => {
     }
   };
   const mate = () => {
-    if (!alumno.data.activeMat) {
+    if (!alumno?.data?.activeMat) {
       enqueueSnackbar("Este modulo esta desactivado", {
         variant: "info",
       });
@@ -49,7 +49,7 @@ const home = () => {
     }
   };
   const lengua = () => {
-    if (!alumno.data.activeLengua) {
+    if (!alumno?.data?.activeLengua) {
       enqueueSnackbar("Este modulo esta desactivado", {
         variant: "info",
       });
@@ -164,6 +164,7 @@ export default home;
 export async function getServerSideProps(ctx) {
   const cookies = new Cookies(ctx?.req, ctx?.res);
   var isSesion = cookies.get('user');
+  
   const login = isSesion ? true : false
   if (!login) {
     return {

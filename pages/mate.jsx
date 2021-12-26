@@ -20,10 +20,6 @@ const mate = () => {
   useEffect(() => {
     dispatch(accionTest(true));
     dispatch(accionTipe("Pensamiento matemático"));
-    if (!alumno?.data?.activeMat) {
-      router.push("/home");
-    }
-
     return () => {
       dispatch(accionTest(false));
       dispatch(accionTipe(""));
@@ -76,11 +72,22 @@ export default mate;
 export async function getServerSideProps(ctx) {
   const cookies = new Cookies(ctx?.req, ctx?.res);
   var isSesion = cookies.get('user');
+  var active = cookies.get('activeMat');
+  var examActive = JSON.parse(active)
   const login = isSesion ? true : false
   if (!login) {
     return {
       redirect: {
         destination: '/',
+        permanent: false
+      },
+      props: { login }
+    }
+  }
+  if (login && !examActive) {
+    return {
+      redirect: {
+        destination: '/home',
         permanent: false
       },
       props: { login }
