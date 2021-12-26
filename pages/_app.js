@@ -5,7 +5,7 @@ import store from 'redux/store'
 import { SnackbarProvider } from "notistack";
 import Layout from 'Layout/Layout'
 import Loading from 'components/Loading'
-//import "materialize-css/dist/css/materialize.css";
+import "materialize-css/dist/css/materialize.css";
 import "semantic-ui-css/semantic.min.css";
 import 'assets/styles/index.css'
 
