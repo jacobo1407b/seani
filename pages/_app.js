@@ -8,6 +8,7 @@ import Loading from 'components/Loading'
 import "materialize-css/dist/css/materialize.css";
 import "semantic-ui-css/semantic.min.css";
 import 'assets/styles/index.css'
+import 'assets/styles/modules.css'
 
 
 function MyApp({ Component, pageProps }) {

@@ -394,3 +394,7 @@ iframe {
     opacity: 1;
   }
 }
+
+blockquote{
+  overflow: hidden;
+}

@@ -10,6 +10,9 @@ import SaveIcon from "@material-ui/icons/Save";
 //custom
 import {useSelector} from 'react-redux'
 import {testExam} from 'utils/api';
+//styled
+import {IMG} from './styled';
+import Alert from '../Alert/Alert';
 
 const Pregunta1 = ({ dtajs, dataAlumno, posision }) => {
   let conver = parseInt(posision);
@@ -19,6 +22,8 @@ const Pregunta1 = ({ dtajs, dataAlumno, posision }) => {
   //state
   const [tempResp, setTempResp] = useState({});
   const [selectValue, setSelectValue] = useState(valorActive.respuesta);
+  const [alertState, changeAlertState]=useState(false);
+  const [alert, changeAlert]=useState({});
   const user = useSelector(state => state.user)
 
   useEffect(() => {
@@ -50,6 +55,17 @@ const Pregunta1 = ({ dtajs, dataAlumno, posision }) => {
     } else {
       dataAlumno[conver] = tempResp;
       testExam({id:user?.uid,arre:dataAlumno})
+      .then(()=>{
+        changeAlertState(true);
+        changeAlert({
+          tipo: 'exito', mensaje: 'Se guardo con exito'
+        });
+      }).catch(()=>{
+        changeAlertState(true);
+        changeAlert({
+          tipo: 'error', mensaje: 'Existio un error, intentalo nuevamente'
+        });
+      })
       setTempResp({});
     }
   };
@@ -57,7 +73,7 @@ const Pregunta1 = ({ dtajs, dataAlumno, posision }) => {
     <div className="container">
       {dtajs?.pregunta_txt ? <h1>{dtajs?.pregunta_txt}</h1> : null}
       {dtajs?.pregunta_url ? (
-        <img
+        <IMG
           className="responsive-img materialboxed"
           src={dtajs?.pregunta_url}
           alt="pregunta"
@@ -112,6 +128,7 @@ const Pregunta1 = ({ dtajs, dataAlumno, posision }) => {
           </Button>
         </FormControl>
       </form>
+      <Alert tipo={alert.tipo} mensaje={alert.mensaje} estadoAlerta={alertState} cambiarEstadoAerta={changeAlertState} />
     </div>
   );
 };
