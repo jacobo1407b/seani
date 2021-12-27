@@ -11,7 +11,7 @@ import { fechaActual, fechaAplicacion } from 'utils/variables'
 import { accionUser, accionAlumno } from "../redux/accion";
 import Swal from "sweetalert2";
 
-const index = ({ user }) => {
+const index = () => {
   //hooks
   const router = useRouter();
   const dispatch = useDispatch();

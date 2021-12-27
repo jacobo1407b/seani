@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 export default function CustomHead({Logo}) {
     return (
-        <div>
+        <>
             <meta charSet="utf-8" />
             <link rel="icon" href={Logo} />
             <link rel="apple-touch-icon" href={Logo} />
@@ -45,7 +45,7 @@ export default function CustomHead({Logo}) {
                 rel="stylesheet"
                 type="text/css"
             />
-        </div>
+        </>
     );
 }
 

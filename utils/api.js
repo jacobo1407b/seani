@@ -77,6 +77,9 @@ export const getInitial = async (uid) => {
 
 export const logOut = async () => {
   document.cookie = `user=undefined; max-age=0; path=/`;
-  document.cookie = `initial=undefined; max-age=0; path=/`;
+  document.cookie = `activeExam1=undefined; max-age=0; path=/`;
+  document.cookie = `activeLengua=undefined; max-age=0; path=/`;
+  document.cookie = `activeLogic=undefined; max-age=0; path=/`;
+  document.cookie = `activeMat=undefined; max-age=0; path=/`;
   await auth.signOut();
 }
