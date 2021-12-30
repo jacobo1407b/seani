@@ -42,18 +42,20 @@ export const mateExam = async (data) => {
 //finish test
 export const mateCancel = async (data) => {
   await db.doc(`${collection}/${data.id}`).update({ activeMat: false });
-
+  document.cookie = `activeMat=false; max-age=3600; path=/; secure`;
 }
 export const logiCancel = async (data) => {
-
   await db.doc(`${collection}/${data.id}`).update({ activeLogic: false });
+  document.cookie = `activeLogic=false; max-age=3600; path=/; secure`;
 }
 export const lenguaCancel = async (data) => {
   await db.doc(`${collection}/${data.id}`).update({ activeLengua: false });
+  document.cookie = `activeLengua=false; max-age=3600; path=/; secure`;
 
 }
 export const examCancel = async (data) => {
   await db.doc(`${collection}/${data.id}`).update({ activeExam1: false });
+  document.cookie = `activeExam1=false; max-age=3600; path=/; secure`;
 }
 //destroy
 export const allCancel = async (data) => {
@@ -64,6 +66,10 @@ export const allCancel = async (data) => {
     activeExam1: false,
     time: 0,
   });
+  document.cookie = `activeExam1=false; max-age=3600; path=/; secure`;
+  document.cookie = `activeLengua=false; max-age=3600; path=/; secure`;
+  document.cookie = `activeLogic=false; max-age=3600; path=/; secure`;
+  document.cookie = `activeMat=false; max-age=3600; path=/; secure`;                
 }
 
 /**GET DATA USER */

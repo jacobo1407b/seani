@@ -52,12 +52,11 @@ const index = () => {
           
           dispatch(accionUser(response.user));
           const { data } = await getInitial(response.user.uid);
-          document.cookie = `user=${JSON.stringify(response.user)}; max-age=3600; path=/`;
-          document.cookie = `activeExam1=${JSON.stringify(data.activeExam1)}; max-age=3600; path=/`;
-          document.cookie = `activeLengua=${JSON.stringify(data.activeLengua)}; max-age=3600; path=/`;
-          document.cookie = `activeLogic=${JSON.stringify(data.activeLogic)}; max-age=3600; path=/`;
-          document.cookie = `activeMat=${JSON.stringify(data.activeMat)}; max-age=3600; path=/`;
-
+          document.cookie = `user=${JSON.stringify(response.user)}; max-age=3600; path=/; secure`;
+          document.cookie = `activeExam1=${JSON.stringify(data.activeExam1)}; max-age=3600; path=/; secure`;
+          document.cookie = `activeLengua=${JSON.stringify(data.activeLengua)}; max-age=3600; path=/; secure`;
+          document.cookie = `activeLogic=${JSON.stringify(data.activeLogic)}; max-age=3600; path=/; secure`;
+          document.cookie = `activeMat=${JSON.stringify(data.activeMat)}; max-age=3600; path=/; secure`;
           dispatch(accionAlumno({ data }));
           setIsloadin(false);
           router.push("/home");
